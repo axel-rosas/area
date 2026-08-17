@@ -107,7 +107,6 @@
   line-height: 1.75;
 }
 
-.about-history,
 .service-intro {
   display: grid;
   grid-template-columns: 0.7fr 2fr;
@@ -115,37 +114,111 @@
   align-items: start;
 }
 
-.philosophy-section {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 90px;
-  align-items: center;
+.about-page .page-hero h1 span {
+  font-size: 1em;
 }
 
-.editorial-image {
-  position: relative;
-  min-height: 600px;
+.about-section {
+  padding-block: 100px;
+}
+
+.about-section + .about-section {
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.about-heading {
+  margin-bottom: 48px;
+}
+
+.about-heading h2 {
+  font-size: clamp(28px, 2.6vw, 36px);
+  font-weight: 400;
+  line-height: 1.25;
+  text-transform: uppercase;
+}
+
+.about-heading h2 span {
+  color: var(--orange);
+}
+
+.about-rich-text {
+  max-width: 920px;
+  display: grid;
+  gap: 20px;
+  color: var(--muted);
+  font-size: 18px;
+  line-height: 1.8;
+}
+
+.about-philosophy-layout {
+  display: grid;
+  grid-template-columns: 1.08fr 0.92fr;
+  gap: 70px;
+  align-items: stretch;
+}
+
+.about-image {
+  min-height: 520px;
+  overflow: hidden;
   margin: 0;
 }
 
-.editorial-image::before {
-  content: '';
-  position: absolute;
-  inset: -18px 18px 18px -18px;
-  border: 1px solid rgba(255, 255, 255, 0.38);
-}
-
-.editorial-image img {
-  position: absolute;
-  inset: 0;
+.about-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: brightness(0.72) saturate(0.72);
+  filter: brightness(0.72) saturate(0.75);
 }
 
-.philosophy-section .section-index {
-  margin-bottom: 24px;
+.about-bullet-list {
+  display: grid;
+  align-content: center;
+  margin: 0;
+  padding: 0;
+  color: var(--muted);
+  font-size: 17px;
+  line-height: 1.65;
+  list-style: none;
+}
+
+.about-bullet-list li {
+  position: relative;
+  padding: 20px 0 20px 26px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.about-bullet-list li::before {
+  content: '';
+  position: absolute;
+  top: 0.7em;
+  left: 0;
+  width: 7px;
+  height: 7px;
+  background: var(--orange);
+}
+
+.about-pair {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 28px;
+}
+
+.about-panel {
+  min-height: 330px;
+  padding: 42px;
+  border: 2px solid var(--border);
+}
+
+.about-panel .about-heading {
+  margin-bottom: 34px;
+}
+
+.about-panel > p,
+.about-introduction,
+.about-manifesto > p {
+  color: var(--muted);
+  font-size: 18px;
+  line-height: 1.75;
 }
 
 .page-section-heading {
@@ -223,6 +296,124 @@
 .value-card:hover > span,
 .stage-card:hover > span {
   color: var(--orange);
+}
+
+.about-values-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+.about-value-card {
+  min-height: 220px;
+  padding: 34px;
+  border: 2px solid var(--border);
+}
+
+.about-value-card:last-child {
+  grid-column: 1 / -1;
+}
+
+.about-value-card h3 {
+  color: var(--orange);
+  font-size: 20px;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.about-value-card p {
+  max-width: 520px;
+  margin-top: 18px;
+  color: var(--muted);
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+.about-promise-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 70px;
+  align-items: center;
+}
+
+.about-promise-lines {
+  display: grid;
+  gap: 16px;
+  max-width: 720px;
+  padding-left: 30px;
+  border-left: 3px solid var(--orange);
+  font-size: clamp(18px, 1.7vw, 23px);
+  font-weight: 300;
+  line-height: 1.5;
+}
+
+.about-promise-lines p:last-child {
+  color: var(--orange);
+}
+
+.about-promise-brand {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding-right: 24px;
+}
+
+.about-promise-brand .brand-symbol {
+  width: 64px;
+  height: 64px;
+}
+
+.about-promise-brand .about-promise-name {
+  width: 210px;
+}
+
+.about-introduction {
+  max-width: 850px;
+}
+
+.about-services-label {
+  margin-top: 48px;
+  color: var(--orange);
+  font-size: 15px;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.about-services-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0 32px;
+  margin: 20px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.about-services-list li {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.24);
+  font-size: 18px;
+}
+
+.about-services-list a {
+  display: block;
+  padding: 15px 0;
+  transition: color 180ms ease, padding-left 180ms ease;
+}
+
+.about-services-list a:hover,
+.about-services-list a:focus-visible {
+  padding-left: 10px;
+  color: var(--orange);
+}
+
+.about-manifesto {
+  padding-bottom: 140px;
+}
+
+.about-manifesto > p {
+  max-width: 930px;
+  font-size: clamp(20px, 2vw, 27px);
+  font-weight: 300;
+  line-height: 1.7;
 }
 
 .team-grid {
@@ -699,23 +890,59 @@
     font-size: clamp(58px, 10vw, 84px);
   }
 
-  .about-history,
   .service-intro {
     grid-template-columns: 1fr 3fr;
     gap: 40px;
   }
 
-  .philosophy-section {
-    gap: 42px;
+  .about-section {
+    padding-block: 84px;
   }
 
-  .editorial-image {
-    min-height: 520px;
+  .about-philosophy-layout {
+    gap: 40px;
+  }
+
+  .about-image {
+    min-height: 460px;
+  }
+
+  .about-pair {
+    gap: 22px;
+  }
+
+  .about-panel {
+    min-height: 360px;
+    padding: 32px;
   }
 
   .values-grid,
   .stages-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .about-services-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .about-promise-layout {
+    gap: 42px;
+  }
+
+  .about-promise-brand {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+    padding-right: 0;
+  }
+
+  .about-promise-brand .brand-symbol {
+    width: 50px;
+    height: 50px;
+  }
+
+  .about-promise-brand .about-promise-name {
+    width: 170px;
   }
 
   .team-card {
@@ -810,13 +1037,37 @@
     font-size: 16px;
   }
 
-  .about-history,
   .service-intro,
-  .philosophy-section,
   .recognition-section,
   .project-story {
     grid-template-columns: 1fr;
     gap: 42px;
+  }
+
+  .about-section {
+    padding-block: 68px;
+  }
+
+  .about-heading {
+    margin-bottom: 32px;
+  }
+
+  .about-heading h2 {
+    font-size: 27px;
+  }
+
+  .about-philosophy-layout,
+  .about-pair,
+  .about-values-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about-philosophy-layout {
+    gap: 32px;
+  }
+
+  .about-image {
+    min-height: 360px;
   }
 
   .editorial-copy h2,
@@ -833,13 +1084,76 @@
     line-height: 1.65;
   }
 
-  .editorial-image {
-    min-height: 440px;
-    order: 2;
+  .about-rich-text {
+    font-size: 16px;
+    line-height: 1.65;
   }
 
-  .philosophy-section .editorial-copy {
-    order: 1;
+  .about-bullet-list {
+    font-size: 16px;
+  }
+
+  .about-bullet-list li {
+    padding-block: 17px;
+  }
+
+  .about-panel {
+    min-height: auto;
+    padding: 28px 24px;
+  }
+
+  .about-panel > p,
+  .about-introduction,
+  .about-manifesto > p {
+    font-size: 16px;
+    line-height: 1.65;
+  }
+
+  .about-value-card {
+    min-height: auto;
+    padding: 28px 24px;
+  }
+
+  .about-value-card:last-child {
+    grid-column: auto;
+  }
+
+  .about-promise-lines {
+    gap: 16px;
+    padding-left: 22px;
+    font-size: 18px;
+  }
+
+  .about-promise-layout {
+    grid-template-columns: 1fr;
+    gap: 38px;
+  }
+
+  .about-promise-brand {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  .about-promise-brand .brand-symbol {
+    width: 42px;
+    height: 42px;
+  }
+
+  .about-promise-brand .about-promise-name {
+    width: 150px;
+  }
+
+  .about-services-list {
+    grid-template-columns: 1fr;
+  }
+
+  .about-services-list li {
+    font-size: 16px;
+  }
+
+  .about-manifesto {
+    padding-bottom: 90px;
   }
 
   .page-section-heading {

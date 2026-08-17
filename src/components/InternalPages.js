@@ -1,6 +1,7 @@
 import { Header } from './Header.js'
 import { Footer } from './Footer.js'
 import { Contact } from './ContentSections.js'
+import { brandMark, brandSymbol } from './Brand.js'
 import { icon } from '../utils/icons.js'
 import { siteData } from '../data/siteData.js'
 
@@ -30,47 +31,65 @@ function Shell(content, pageClass = '') {
 export function AboutPage() {
   const { company } = siteData
   const values = company.values.map((value) => `
-    <article class="value-card">
-      <span>${value.number}</span>
+    <article class="about-value-card">
       <h3>${value.title}</h3>
       <p>${value.text}</p>
     </article>
   `).join('')
 
-  const team = company.team.map((member) => `
-    <article class="team-card">
-      <div class="team-monogram">${member.initials}</div>
-      <div><h3>${member.name}</h3><p>${member.role}</p></div>
-    </article>
+  const philosophy = company.philosophy.map((item) => `<li>${item}</li>`).join('')
+  const history = company.history.map((paragraph) => `<p>${paragraph}</p>`).join('')
+  const promise = company.promise.map((item) => `<p>${item}</p>`).join('')
+  const services = company.whatWeDo.services.map((service, index) => `
+    <li><a href="#/servicio/${siteData.services[index].id}">${service}</a></li>
   `).join('')
-
-  const certifications = company.certifications.map((name, index) => `
-    <li><span>0${index + 1}</span>${name}</li>
-  `).join('')
-
-  const clients = company.clients.map((name) => `<li>${name}</li>`).join('')
 
   return Shell(`
-    ${PageHero({ title: 'ÁREA<br><span>Arquitectura y Diseño</span>', image: company.heroImage, eyebrow: 'Nosotros', subtitle: 'Diseñamos espacios con sentido, claridad y permanencia.' })}
-    <section class="page-container about-history page-section">
-      <p class="section-index">01 / Historia</p>
-      <div class="editorial-copy"><h2>Una práctica construida alrededor de las personas.</h2><p>${company.history}</p></div>
+    ${PageHero({ title: 'ÁREA <span>Arquitectura &amp; Diseño</span>', image: company.heroImage })}
+    <section class="page-container about-section about-story">
+      <div class="about-heading"><h2>Nuestra <span>historia</span></h2></div>
+      <div class="about-rich-text">${history}</div>
     </section>
-    <section class="page-container philosophy-section page-section">
-      <figure class="editorial-image"><img src="${company.studioImage}" alt="Detalle de un interior diseñado por ÁREA" /></figure>
-      <div class="editorial-copy"><p class="section-index">02 / Filosofía</p><h2>Menos ruido.<br>Más intención.</h2><p>${company.philosophy}</p></div>
+    <section class="page-container about-section">
+      <div class="about-heading"><h2>Nuestra <span>filosofía</span></h2></div>
+      <div class="about-philosophy-layout">
+        <figure class="about-image"><img src="${company.studioImage}" alt="Detalle de un interior diseñado por ÁREA" /></figure>
+        <ul class="about-bullet-list">${philosophy}</ul>
+      </div>
     </section>
-    <section class="page-container page-section">
-      <div class="page-section-heading"><p class="section-index">03 / Principios</p><h2>Valores que guían cada proyecto.</h2></div>
-      <div class="values-grid">${values}</div>
+    <section class="page-container about-section about-pair">
+      <article class="about-panel">
+        <div class="about-heading"><h2>Nuestra <span>misión</span></h2></div>
+        <p>${company.mission}</p>
+      </article>
+      <article class="about-panel">
+        <div class="about-heading"><h2>Nuestra <span>visión</span></h2></div>
+        <p>${company.vision}</p>
+      </article>
     </section>
-    <section class="page-container page-section team-section">
-      <div class="page-section-heading"><p class="section-index">04 / Estudio</p><h2>Nuestro equipo.</h2></div>
-      <div class="team-grid">${team}</div>
+    <section class="page-container about-section">
+      <div class="about-heading"><h2>Nuestros <span>valores</span></h2></div>
+      <div class="about-values-grid">${values}</div>
     </section>
-    <section class="page-container page-section recognition-section">
-      <div><p class="section-index">05 / Experiencia</p><h2>Certificaciones</h2><ul class="word-grid certifications-grid">${certifications}</ul></div>
-      <div><p class="section-index">06 / Colaboraciones</p><h2>Nuestros clientes</h2><ul class="word-grid client-grid">${clients}</ul></div>
+    <section class="page-container about-section">
+      <div class="about-heading"><h2>Nuestra <span>promesa</span></h2></div>
+      <div class="about-promise-layout">
+        <div class="about-promise-lines">${promise}</div>
+        <div class="about-promise-brand" aria-hidden="true">
+          ${brandSymbol()}
+          ${brandMark('about-promise-name')}
+        </div>
+      </div>
+    </section>
+    <section class="page-container about-section">
+      <div class="about-heading"><h2>¿Qué <span>hacemos?</span></h2></div>
+      <p class="about-introduction">${company.whatWeDo.introduction}</p>
+      <p class="about-services-label">Nuestros servicios incluyen:</p>
+      <ul class="about-services-list">${services}</ul>
+    </section>
+    <section class="page-container about-section about-manifesto">
+      <div class="about-heading"><h2>Nuestro <span>manifiesto</span></h2></div>
+      <p>${company.manifesto}</p>
     </section>
   `, 'about-page')
 }
