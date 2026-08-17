@@ -217,21 +217,38 @@ export const projects = [
 export const company = {
   heroImage: aboutHero,
   studioImage: aboutStudio,
-  history: 'Desde 2014, ÁREA desarrolla proyectos de arquitectura, interiores y construcción desde una mirada cercana y rigurosa. Nacimos con la idea de que un buen espacio comienza escuchando: al lugar, a quienes lo habitan y a los recursos disponibles. Esa forma de trabajar nos ha permitido construir relaciones duraderas y proyectos con una identidad propia.',
-  philosophy: 'Creemos en una arquitectura serena, funcional y honesta. Evitamos los gestos innecesarios y buscamos que cada decisión aporte claridad, bienestar y permanencia. Nuestro trabajo combina sensibilidad de diseño con capacidad técnica para acompañar el proyecto de principio a fin.',
+  history: [
+    'ÁREA nace en el año 2013, con la convicción de que la arquitectura tiene el poder de transformar la vida de las personas, a través del espacio que ocupan o habitan.',
+    'A lo largo de nuestra evolución comprendimos que nuestro mayor valor no está únicamente en construir, sino en entender cómo viven, trabajan y conviven las personas, para diseñar espacios que respondan a esas necesidades.',
+    'Por ello, evolucionamos hacia un despacho especializado en arquitectura, diseño y remodelación, donde cada proyecto parte de una idea clara: Crear espacios funcionales, estéticos y duraderos.',
+  ],
+  philosophy: [
+    'Creemos que un buen proyecto no debe impresionar únicamente el día de su entrega, debe seguir funcionando diez o veinte años después.',
+    'Cada decisión de diseño debe tener un propósito.',
+    'Cada material debe responder a una necesidad.',
+    'Cada espacio debe mejorar la experiencia de quien lo utiliza.',
+    'No diseñamos para seguir tendencias, diseñamos para resolver problemas y espacios.',
+  ],
+  mission: 'Diseñar y desarrollar espacios que mejoren la calidad de vida de las personas mediante soluciones arquitectónicas funcionales, estéticas y técnicamente bien ejecutadas.',
+  vision: 'Consolidarnos como uno de los despachos de arquitectura y diseño más reconocidos a nivel global, por la calidad de sus proyectos, la confianza que genera en sus clientes y la capacidad de transformar espacios con un enfoque humano, funcional y contemporáneo.',
   values: [
-    { number: '01', title: 'Escucha', text: 'Entender antes de proponer.' },
-    { number: '02', title: 'Claridad', text: 'Decisiones simples y bien fundamentadas.' },
-    { number: '03', title: 'Cuidado', text: 'Atención constante a cada detalle.' },
-    { number: '04', title: 'Permanencia', text: 'Espacios pensados para durar.' },
+    { title: 'Honestidad', text: 'Decimos la verdad, incluso cuando no es la respuesta que el cliente espera escuchar.' },
+    { title: 'Responsabilidad', text: 'Cumplimos nuestros compromisos y asumimos las consecuencias de nuestras decisiones.' },
+    { title: 'Calidad', text: 'Preferimos hacer menos proyectos, pero hacerlos extraordinariamente bien.' },
+    { title: 'Innovación', text: 'Buscamos constantemente nuevas formas de diseñar, construir y comunicar nuestros proyectos.' },
+    { title: 'Cercanía', text: 'Escuchamos antes de proponer. Comprendemos antes de diseñar.' },
   ],
-  team: [
-    { initials: 'AR', name: 'Ana Robles', role: 'Dirección creativa' },
-    { initials: 'JM', name: 'Javier Mena', role: 'Dirección de proyectos' },
-    { initials: 'SC', name: 'Sofía Cruz', role: 'Coordinación de obra' },
+  promise: [
+    'No vendemos metros cuadrados.',
+    'No vendemos planos.',
+    'No vendemos remodelaciones.',
+    'Creamos espacios que funcionan mejor para las personas que los habitan.',
   ],
-  certifications: ['Colegio de Arquitectos', 'LEED', 'CMIC', 'BIM', 'PMI', 'ISO'],
-  clients: ['Albor', 'Norte', 'Forma', 'Habita', 'Origen', 'Prisma'],
+  whatWeDo: {
+    introduction: 'En ÁREA desarrollamos proyectos integrales de arquitectura y diseño, especializados en clientes residenciales y comerciales.',
+    services: ['Arquitectura.', 'Proyectos ejecutivos.', 'Diseño de interiores.', 'Remodelaciones.', 'Construcción', 'Supervisión de obra.'],
+  },
+  manifesto: 'En ÁREA creemos que la arquitectura comienza mucho antes de colocar el primer ladrillo. Comienza al escuchar, observar y comprender la vida de quienes habitarán un espacio. Cada proyecto representa una oportunidad para mejorar la manera en que las personas viven, trabajan y conviven. Diseñamos con intención, ejecutamos con responsabilidad y cuidamos cada detalle porque entendemos que un buen espacio no solo se ve bien: se vive bien.',
 }
 
 export const benefits = [
