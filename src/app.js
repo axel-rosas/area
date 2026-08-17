@@ -2,7 +2,7 @@ import { siteData } from './data/siteData.js'
 import { Header } from './components/Header.js'
 import { Hero } from './components/Hero.js'
 import { Projects } from './components/Projects.js'
-import { Benefits, Contact, Testimonials } from './components/ContentSections.js'
+import { Benefits, Contact, ServicesShowcase, Testimonials } from './components/ContentSections.js'
 import { Footer } from './components/Footer.js'
 import { AboutPage, NotFoundPage, PortfolioPage, ProjectPage, ServicePage } from './components/InternalPages.js'
 
@@ -16,7 +16,7 @@ export function createApp(root) {
     setupContactForm()
 
     if (route.page === 'home' || route.page === 'contacto' || route.page === 'servicios') {
-      setupServices(route.query.get('servicio'))
+      setupServiceShowcase()
     }
     if (route.page === 'portafolio') setupPortfolio(route.query.get('servicio'))
     if (route.page === 'proyecto') setupGallery()
@@ -24,7 +24,7 @@ export function createApp(root) {
     if (route.page === 'contacto') {
       window.requestAnimationFrame(() => document.querySelector('#contacto')?.scrollIntoView())
     } else if (route.page === 'servicios') {
-      window.requestAnimationFrame(() => document.querySelector('.hero-section')?.scrollIntoView())
+      window.requestAnimationFrame(() => document.querySelector('#servicios')?.scrollIntoView())
     } else {
       window.scrollTo({ top: 0, behavior: 'auto' })
     }
@@ -87,7 +87,8 @@ function renderHome() {
     ${Header()}
     <main>
       ${Hero(siteData)}
-      ${Projects(siteData.projects.slice(0, 6))}
+      ${ServicesShowcase(siteData.services)}
+      ${Projects(siteData.projects.slice(0, 6), siteData.services)}
       ${Benefits(siteData.benefits)}
       ${Testimonials(siteData.testimonials)}
       ${Contact(siteData)}
@@ -100,8 +101,6 @@ function setupNavigation() {
   const header = document.querySelector('.site-header')
   const menuButton = document.querySelector('.menu-button')
   const navigation = document.querySelector('.main-nav')
-  const dropdown = document.querySelector('.nav-dropdown')
-  const dropdownButton = document.querySelector('.nav-dropdown-trigger button')
 
   function updateHeaderBackground() {
     header.classList.toggle('is-scrolled', window.scrollY > 24)
@@ -118,20 +117,12 @@ function setupNavigation() {
   })
 
   navigation.addEventListener('click', (event) => {
-    if (event.target.matches('a')) {
+    if (event.target.closest('a')) {
       header.classList.remove('menu-is-open')
       document.body.classList.remove('nav-is-open')
       menuButton.setAttribute('aria-expanded', 'false')
       menuButton.setAttribute('aria-label', 'Abrir menú')
     }
-  })
-
-  dropdownButton.addEventListener('click', () => {
-    if (window.matchMedia('(max-width: 767px)').matches) return
-
-    const isOpen = dropdown.classList.toggle('submenu-is-open')
-    dropdownButton.setAttribute('aria-expanded', String(isOpen))
-    dropdownButton.setAttribute('aria-label', isOpen ? 'Ocultar servicios' : 'Mostrar servicios')
   })
 
   document.onkeydown = (event) => {
@@ -144,39 +135,48 @@ function setupNavigation() {
   }
 }
 
-function setupServices(initialService) {
-  const hero = document.querySelector('.hero-section')
-  const brandView = document.querySelector('.hero-brand-view')
-  const serviceView = document.querySelector('.hero-service-view')
-  const serviceTitle = document.querySelector('.hero-service-title')
-  const serviceDescription = document.querySelector('.hero-service-description')
-  const serviceLink = document.querySelector('.hero-service-link')
-  const serviceSelect = document.querySelector('select[name="service"]')
+function setupServiceShowcase() {
+  const cards = [...document.querySelectorAll('.service-card')]
 
-  function showService(serviceId) {
-    const service = siteData.services.find((item) => item.id === serviceId)
-    if (!service) return
+  cards.forEach((card) => {
+    const actionSlot = card.querySelector('.service-card-action-slot')
+    const actionTemplate = card.querySelector('.service-card-action-template')
+    const usesHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches
 
-    hero.style.setProperty('--hero-image', `url('${service.image}')`)
-    hero.classList.add('showing-service')
-    brandView.hidden = true
-    serviceView.hidden = false
-    serviceTitle.textContent = service.name
-    serviceDescription.textContent = service.description
-    serviceLink.href = `#/servicio/${service.id}`
-    serviceSelect.value = service.id
+    const mountAction = () => {
+      if (actionSlot.firstElementChild) return
 
-    document.querySelectorAll('.service-button').forEach((button) => {
-      button.classList.toggle('is-active', button.dataset.serviceId === service.id)
-    })
-  }
+      actionSlot.replaceChildren(actionTemplate.content.cloneNode(true))
+      actionSlot.querySelector('.service-card-action').onclick = (event) => {
+        event.stopPropagation()
+      }
+    }
 
-  document.querySelector('.service-menu').addEventListener('click', (event) => {
-    const button = event.target.closest('.service-button')
-    if (button) showService(button.dataset.serviceId)
+    if (usesHover) mountAction()
+
+    const toggleCard = () => {
+      const isOpen = card.classList.toggle('is-open')
+      card.setAttribute('aria-expanded', String(isOpen))
+
+      if (!isOpen && !usesHover) {
+        actionSlot.replaceChildren()
+        return
+      }
+
+      mountAction()
+    }
+
+    card.onclick = (event) => {
+      if (event.target.closest('.service-card-action')) return
+      toggleCard()
+    }
+
+    card.onkeydown = (event) => {
+      if (event.target !== card || !['Enter', ' '].includes(event.key)) return
+      event.preventDefault()
+      toggleCard()
+    }
   })
-
-  if (initialService) showService(initialService)
 }
 
 function setupPortfolio(initialFilter) {
@@ -184,31 +184,75 @@ function setupPortfolio(initialFilter) {
   const searchInput = document.querySelector('.search-field input')
   const cards = [...document.querySelectorAll('.portfolio-card')]
   const emptyState = document.querySelector('.portfolio-empty')
+  const pagination = document.querySelector('.portfolio-pagination')
+  const projectsPerPage = 9
   let activeFilter = filterButtons.some((button) => button.dataset.filter === initialFilter) ? initialFilter : 'all'
+  let currentPage = 1
+
+  function renderPagination(pageCount) {
+    pagination.hidden = pageCount <= 1
+
+    if (pagination.hidden) {
+      pagination.replaceChildren()
+      return
+    }
+
+    const pageButtons = Array.from({ length: pageCount }, (_, index) => {
+      const page = index + 1
+      const isCurrent = page === currentPage
+      return `<button type="button" class="pagination-button${isCurrent ? ' is-active' : ''}" data-page="${page}" aria-label="Ir a la página ${page}"${isCurrent ? ' aria-current="page"' : ''}>${page}</button>`
+    }).join('')
+
+    pagination.innerHTML = `
+      <button type="button" class="pagination-button pagination-previous" data-page="${currentPage - 1}" aria-label="Página anterior"${currentPage === 1 ? ' disabled' : ''}>&larr;</button>
+      ${pageButtons}
+      <button type="button" class="pagination-button pagination-next" data-page="${currentPage + 1}" aria-label="Página siguiente"${currentPage === pageCount ? ' disabled' : ''}>&rarr;</button>
+    `
+  }
 
   function applyFilters() {
     const search = searchInput.value.trim().toLowerCase()
-    let visibleCount = 0
-
-    cards.forEach((card) => {
+    const matchingCards = cards.filter((card) => {
       const matchesService = activeFilter === 'all' || card.dataset.service === activeFilter
       const matchesSearch = !search || card.dataset.name.includes(search)
-      card.hidden = !(matchesService && matchesSearch)
-      if (!card.hidden) visibleCount += 1
+      return matchesService && matchesSearch
+    })
+    const pageCount = Math.ceil(matchingCards.length / projectsPerPage)
+    currentPage = Math.min(currentPage, Math.max(pageCount, 1))
+    const firstProject = (currentPage - 1) * projectsPerPage
+    const visibleCards = new Set(matchingCards.slice(firstProject, firstProject + projectsPerPage))
+
+    cards.forEach((card) => {
+      card.hidden = !visibleCards.has(card)
     })
 
     filterButtons.forEach((button) => button.classList.toggle('is-active', button.dataset.filter === activeFilter))
-    emptyState.hidden = visibleCount > 0
+    emptyState.hidden = matchingCards.length > 0
+    renderPagination(pageCount)
   }
 
   filterButtons.forEach((button) => {
     button.addEventListener('click', () => {
       activeFilter = button.dataset.filter
+      currentPage = 1
       applyFilters()
     })
   })
 
-  searchInput.addEventListener('input', applyFilters)
+  searchInput.addEventListener('input', () => {
+    currentPage = 1
+    applyFilters()
+  })
+
+  pagination.addEventListener('click', (event) => {
+    const button = event.target.closest('.pagination-button')
+    if (!button || button.disabled) return
+
+    currentPage = Number(button.dataset.page)
+    applyFilters()
+    document.querySelector('.portfolio-page-grid').scrollIntoView({ behavior: 'smooth', block: 'start' })
+  })
+
   applyFilters()
 }
 

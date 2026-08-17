@@ -45,7 +45,7 @@ export function AboutPage() {
   `).join('')
 
   return Shell(`
-    ${PageHero({ title: 'ÁREA <span>Arquitectura &amp; Diseño</span>', image: company.heroImage })}
+    ${PageHero({ title: `${brandMark('about-title-logo')}<span class="about-title-tagline">Arquitectura &amp; Diseño</span>`, image: company.heroImage })}
     <section class="page-container about-section about-story">
       <div class="about-heading"><h2>Nuestra <span>historia</span></h2></div>
       <div class="about-rich-text">${history}</div>
@@ -111,17 +111,17 @@ export function ServicePage(service) {
   `).join('')
 
   return Shell(`
-    ${PageHero({ title: service.name, image: service.image, eyebrow: 'Servicio', subtitle: service.description })}
+    ${PageHero({ title: service.name, image: service.image, subtitle: service.description })}
     <section class="page-container service-intro page-section">
-      <p class="section-index">01 / Enfoque</p>
-      <div class="editorial-copy"><h2>Diseño y precisión en cada etapa.</h2><p>${service.introduction}</p></div>
+      <div class="internal-section-heading"><h2>Diseño y precisión <span>en cada etapa</span></h2></div>
+      <p class="service-intro-copy">${service.introduction}</p>
     </section>
     <section class="page-container page-section">
-      <div class="page-section-heading"><p class="section-index">02 / Proceso</p><h2>Un proceso claro,<br>de principio a fin.</h2></div>
+      <div class="internal-section-heading"><h2>Un proceso <span>claro</span>, de principio a fin</h2></div>
       <div class="stages-grid">${stages}</div>
     </section>
     <section class="page-container page-section">
-      <div class="page-section-heading page-section-heading--split"><div><p class="section-index">03 / Selección</p><h2>Proyectos relacionados.</h2></div><a href="#/portafolio?servicio=${service.id}">Ver portafolio</a></div>
+      <div class="internal-section-heading internal-section-heading--split"><h2>Proyectos <span>relacionados</span></h2><a href="#/portafolio?servicio=${service.id}">Ver portafolio</a></div>
       <div class="service-gallery">${gallery}</div>
     </section>
     ${Contact(siteData)}
@@ -135,12 +135,11 @@ export function PortfolioPage() {
   const projects = siteData.projects.map((project) => {
     const service = siteData.services.find((item) => item.id === project.serviceId)
     return `
-      <article class="portfolio-card" data-service="${project.serviceId}" data-name="${project.name.toLowerCase()}">
+      <a class="portfolio-card" href="#/proyecto/${project.slug}" aria-label="Ver ${project.name}" data-service="${project.serviceId}" data-name="${project.name.toLowerCase()}">
         <img src="${project.cover}" alt="${project.name}" />
         <div class="portfolio-card-shade"></div>
         <div class="portfolio-card-copy"><p>${service.shortName} / ${project.year}</p><h2>${project.name}</h2></div>
-        <a href="#/proyecto/${project.slug}" aria-label="Ver ${project.name}">${icon('arrow')}<span>Ver proyecto</span></a>
-      </article>
+      </a>
     `
   }).join('')
 
@@ -159,6 +158,7 @@ export function PortfolioPage() {
       </div>
       <div class="portfolio-page-grid">${projects}</div>
       <p class="portfolio-empty" hidden>No encontramos proyectos con esos criterios.</p>
+      <nav class="portfolio-pagination" aria-label="Páginas del portafolio" hidden></nav>
     </section>
   `, 'portfolio-page')
 }
@@ -173,16 +173,17 @@ export function ProjectPage(project) {
 
   return Shell(`
     ${PageHero({ title: project.name, image: project.cover, eyebrow: `${service.shortName} / ${project.year}`, subtitle: project.location })}
-    <article class="page-container project-story page-section">
-      <div class="project-story-copy">
-        <section><p class="section-index">01 / Proyecto</p><h2>Descripción</h2><p>${project.description}</p></section>
-        <section><p class="section-index">02 / Punto de partida</p><h2>Problema</h2><p>${project.problem}</p></section>
-        <section><p class="section-index">03 / Respuesta</p><h2>Solución</h2><p>${project.solution}</p></section>
-      </div>
+    <section class="page-container project-overview page-section">
+      <div class="internal-section-heading"><h2>Sobre el <span>proyecto</span></h2></div>
       <figure class="project-feature-image"><img src="${project.gallery[1]}" alt="Detalle principal de ${project.name}" /></figure>
-    </article>
+      <div class="project-narrative-grid">
+        <article class="project-narrative-card"><h3>El proyecto</h3><p>${project.description}</p></article>
+        <article class="project-narrative-card"><h3>El reto</h3><p>${project.problem}</p></article>
+        <article class="project-narrative-card"><h3>La solución</h3><p>${project.solution}</p></article>
+      </div>
+    </section>
     <section class="page-container page-section">
-      <div class="page-section-heading"><p class="section-index">04 / Galería</p><h2>El proyecto en detalle.</h2></div>
+      <div class="internal-section-heading"><h2>El proyecto <span>en detalle</span></h2></div>
       <div class="project-detail-gallery">${gallery}</div>
     </section>
     ${Contact(siteData)}

@@ -1,5 +1,35 @@
 import { icon } from '../utils/icons.js'
 
+export function ServicesShowcase(services) {
+  const cards = services.map((service) => `
+    <article class="service-card" tabindex="0" aria-expanded="false">
+      <img src="${service.image}" alt="${service.name}" loading="lazy" />
+      <span class="service-card-shade"></span>
+      <div class="service-card-content">
+        <h3>${service.name}</h3>
+        <div class="service-card-details">
+          <p>${service.description}</p>
+          <div class="service-card-action-slot"></div>
+          <template class="service-card-action-template">
+            <a class="service-card-action" href="#/servicio/${service.id}">
+              Ver más ${icon('arrow')}
+            </a>
+          </template>
+        </div>
+      </div>
+    </article>
+  `).join('')
+
+  return `
+    <section id="servicios" class="content-section services-showcase-section" aria-labelledby="services-title">
+      <div class="section-heading">
+        <h2 id="services-title">Nuestros <span>servicios</span></h2>
+      </div>
+      <div class="services-card-grid">${cards}</div>
+    </section>
+  `
+}
+
 export function Benefits(benefits) {
   const items = benefits.map((benefit) => `
     <article class="benefit-card">${icon(benefit.icon)}<p>${benefit.label}</p></article>
@@ -37,7 +67,7 @@ export function Testimonials(testimonials) {
   `
 }
 
-export function Contact({ services, contactMap }) {
+export function Contact({ services }) {
   const options = services.map((service) => `<option value="${service.id}">${service.name}</option>`).join('')
 
   return `
@@ -56,7 +86,16 @@ export function Contact({ services, contactMap }) {
           <div class="form-footer"><p class="form-status" role="status"></p><button class="outline-button" type="submit">Enviar mensaje</button></div>
         </form>
         <div class="contact-location">
-          <img src="${contactMap}" alt="Mapa de nuestra ubicación cerca del Centro Histórico" />
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7525.205144081373!2d-99.13846369604799!3d19.429570335690862!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1f92af577b44b%3A0xdb290ed58ba64e40!2sAlameda%20Central!5e0!3m2!1ses-419!2smx!4v1786993366131!5m2!1ses-419!2smx"
+            width="600"
+            height="450"
+            style="border: 0"
+            allowfullscreen
+            loading="lazy"
+            referrerpolicy="strict-origin-when-cross-origin"
+            title="Ubicación de ÁREA cerca de Alameda Central"
+          ></iframe>
           <div class="contact-detail">${icon('pin')}<p>Una calle de un lugar de por ahí.</p></div>
           <div class="contact-detail">${icon('clock')}<p>Lunes a viernes<br />9:00 - 18:00</p></div>
           <div class="contact-social">

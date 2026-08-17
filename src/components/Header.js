@@ -21,11 +21,10 @@ export function Header(showName = false) {
       <nav id="main-navigation" class="main-nav" aria-label="Navegación principal">
         <div class="nav-dropdown">
           <div class="nav-dropdown-trigger">
-            <button type="button" aria-expanded="false" aria-label="Mostrar servicios">
+            <a class="nav-services-link" href="#/servicios">
               <span>Servicios</span>
               <img src="${downIcon}" alt="" aria-hidden="true" />
-            </button>
-            <p class="mobile-services-title">Servicios</p>
+            </a>
           </div>
           <div class="services-submenu">${serviceLinks}</div>
         </div>
