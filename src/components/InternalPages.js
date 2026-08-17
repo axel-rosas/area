@@ -1,0 +1,188 @@
+import { Header } from './Header.js'
+import { Footer } from './Footer.js'
+import { Contact } from './ContentSections.js'
+import { icon } from '../utils/icons.js'
+import { siteData } from '../data/siteData.js'
+
+function PageHero({ title, image, eyebrow, subtitle }) {
+  return `
+    <section class="page-hero" style="--page-hero-image: url('${image}')">
+      <div class="page-hero-overlay"></div>
+      <div class="page-container page-hero-content">
+        ${eyebrow ? `<p class="page-eyebrow">${eyebrow}</p>` : ''}
+        <h1>${title}</h1>
+        ${subtitle ? `<p class="page-hero-subtitle">${subtitle}</p>` : ''}
+      </div>
+    </section>
+  `
+}
+
+function Shell(content, pageClass = '') {
+  return `
+    <div class="internal-site ${pageClass}">
+      ${Header(true)}
+      <main>${content}</main>
+      ${Footer(siteData.services)}
+    </div>
+  `
+}
+
+export function AboutPage() {
+  const { company } = siteData
+  const values = company.values.map((value) => `
+    <article class="value-card">
+      <span>${value.number}</span>
+      <h3>${value.title}</h3>
+      <p>${value.text}</p>
+    </article>
+  `).join('')
+
+  const team = company.team.map((member) => `
+    <article class="team-card">
+      <div class="team-monogram">${member.initials}</div>
+      <div><h3>${member.name}</h3><p>${member.role}</p></div>
+    </article>
+  `).join('')
+
+  const certifications = company.certifications.map((name, index) => `
+    <li><span>0${index + 1}</span>${name}</li>
+  `).join('')
+
+  const clients = company.clients.map((name) => `<li>${name}</li>`).join('')
+
+  return Shell(`
+    ${PageHero({ title: 'ÁREA<br><span>Arquitectura y Diseño</span>', image: company.heroImage, eyebrow: 'Nosotros', subtitle: 'Diseñamos espacios con sentido, claridad y permanencia.' })}
+    <section class="page-container about-history page-section">
+      <p class="section-index">01 / Historia</p>
+      <div class="editorial-copy"><h2>Una práctica construida alrededor de las personas.</h2><p>${company.history}</p></div>
+    </section>
+    <section class="page-container philosophy-section page-section">
+      <figure class="editorial-image"><img src="${company.studioImage}" alt="Detalle de un interior diseñado por ÁREA" /></figure>
+      <div class="editorial-copy"><p class="section-index">02 / Filosofía</p><h2>Menos ruido.<br>Más intención.</h2><p>${company.philosophy}</p></div>
+    </section>
+    <section class="page-container page-section">
+      <div class="page-section-heading"><p class="section-index">03 / Principios</p><h2>Valores que guían cada proyecto.</h2></div>
+      <div class="values-grid">${values}</div>
+    </section>
+    <section class="page-container page-section team-section">
+      <div class="page-section-heading"><p class="section-index">04 / Estudio</p><h2>Nuestro equipo.</h2></div>
+      <div class="team-grid">${team}</div>
+    </section>
+    <section class="page-container page-section recognition-section">
+      <div><p class="section-index">05 / Experiencia</p><h2>Certificaciones</h2><ul class="word-grid certifications-grid">${certifications}</ul></div>
+      <div><p class="section-index">06 / Colaboraciones</p><h2>Nuestros clientes</h2><ul class="word-grid client-grid">${clients}</ul></div>
+    </section>
+  `, 'about-page')
+}
+
+export function ServicePage(service) {
+  const stages = service.stages.map((stage, index) => `
+    <article class="stage-card"><span>0${index + 1}</span><h3>${stage}</h3></article>
+  `).join('')
+
+  const relatedProjects = [...siteData.projects]
+    .sort((a, b) => Number(b.serviceId === service.id) - Number(a.serviceId === service.id))
+    .slice(0, 6)
+
+  const gallery = relatedProjects.map((project) => `
+    <a class="service-gallery-item" href="#/proyecto/${project.slug}">
+      <img src="${project.cover}" alt="${project.name}" />
+      <span><b>${project.name}</b>${icon('arrow')}</span>
+    </a>
+  `).join('')
+
+  return Shell(`
+    ${PageHero({ title: service.name, image: service.image, eyebrow: 'Servicio', subtitle: service.description })}
+    <section class="page-container service-intro page-section">
+      <p class="section-index">01 / Enfoque</p>
+      <div class="editorial-copy"><h2>Diseño y precisión en cada etapa.</h2><p>${service.introduction}</p></div>
+    </section>
+    <section class="page-container page-section">
+      <div class="page-section-heading"><p class="section-index">02 / Proceso</p><h2>Un proceso claro,<br>de principio a fin.</h2></div>
+      <div class="stages-grid">${stages}</div>
+    </section>
+    <section class="page-container page-section">
+      <div class="page-section-heading page-section-heading--split"><div><p class="section-index">03 / Selección</p><h2>Proyectos relacionados.</h2></div><a href="#/portafolio?servicio=${service.id}">Ver portafolio</a></div>
+      <div class="service-gallery">${gallery}</div>
+    </section>
+    ${Contact(siteData)}
+  `, 'service-page')
+}
+
+export function PortfolioPage() {
+  const usedServices = siteData.services.filter((service) => siteData.projects.some((project) => project.serviceId === service.id))
+  const filters = [`<button type="button" class="filter-button is-active" data-filter="all">Todos</button>`, ...usedServices.map((service) => `<button type="button" class="filter-button" data-filter="${service.id}">${service.shortName}</button>`)].join('')
+
+  const projects = siteData.projects.map((project) => {
+    const service = siteData.services.find((item) => item.id === project.serviceId)
+    return `
+      <article class="portfolio-card" data-service="${project.serviceId}" data-name="${project.name.toLowerCase()}">
+        <img src="${project.cover}" alt="${project.name}" />
+        <div class="portfolio-card-shade"></div>
+        <div class="portfolio-card-copy"><p>${service.shortName} / ${project.year}</p><h2>${project.name}</h2></div>
+        <a href="#/proyecto/${project.slug}" aria-label="Ver ${project.name}">${icon('arrow')}<span>Ver proyecto</span></a>
+      </article>
+    `
+  }).join('')
+
+  return Shell(`
+    <section class="portfolio-header">
+      <div class="page-container">
+        <p class="page-eyebrow">Trabajo seleccionado</p>
+        <h1>Portafolio</h1>
+        <p>Espacios pensados desde el contexto, la función y la experiencia.</p>
+      </div>
+    </section>
+    <section class="page-container portfolio-browser page-section">
+      <div class="portfolio-controls">
+        <div class="filter-bar" aria-label="Filtrar por servicio">${filters}</div>
+        <label class="search-field">${icon('search')}<span class="sr-only">Buscar proyecto</span><input type="search" placeholder="Buscar proyecto" /></label>
+      </div>
+      <div class="portfolio-page-grid">${projects}</div>
+      <p class="portfolio-empty" hidden>No encontramos proyectos con esos criterios.</p>
+    </section>
+  `, 'portfolio-page')
+}
+
+export function ProjectPage(project) {
+  const service = siteData.services.find((item) => item.id === project.serviceId)
+  const gallery = project.gallery.map((image, index) => `
+    <button class="project-gallery-item" type="button" data-gallery-index="${index}" aria-label="Ampliar imagen ${index + 1} de ${project.name}">
+      <img src="${image}" alt="${project.name}, vista ${index + 1}" />
+    </button>
+  `).join('')
+
+  return Shell(`
+    ${PageHero({ title: project.name, image: project.cover, eyebrow: `${service.shortName} / ${project.year}`, subtitle: project.location })}
+    <article class="page-container project-story page-section">
+      <div class="project-story-copy">
+        <section><p class="section-index">01 / Proyecto</p><h2>Descripción</h2><p>${project.description}</p></section>
+        <section><p class="section-index">02 / Punto de partida</p><h2>Problema</h2><p>${project.problem}</p></section>
+        <section><p class="section-index">03 / Respuesta</p><h2>Solución</h2><p>${project.solution}</p></section>
+      </div>
+      <figure class="project-feature-image"><img src="${project.gallery[1]}" alt="Detalle principal de ${project.name}" /></figure>
+    </article>
+    <section class="page-container page-section">
+      <div class="page-section-heading"><p class="section-index">04 / Galería</p><h2>El proyecto en detalle.</h2></div>
+      <div class="project-detail-gallery">${gallery}</div>
+    </section>
+    ${Contact(siteData)}
+    <dialog class="gallery-dialog" aria-label="Galería ampliada">
+      <button class="gallery-close" type="button" aria-label="Cerrar galería">${icon('close')}</button>
+      <button class="gallery-arrow gallery-previous" type="button" aria-label="Imagen anterior">←</button>
+      <img src="" alt="" />
+      <button class="gallery-arrow gallery-next" type="button" aria-label="Imagen siguiente">→</button>
+      <p></p>
+    </dialog>
+  `, 'project-page')
+}
+
+export function NotFoundPage() {
+  return Shell(`
+    <section class="not-found page-container">
+      <p class="section-index">404 / Página no encontrada</p>
+      <h1>Este espacio aún no existe.</h1>
+      <a class="outline-button" href="#/">Volver al inicio</a>
+    </section>
+  `, 'not-found-page')
+}
