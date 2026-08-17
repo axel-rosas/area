@@ -144,7 +144,7 @@ export function PortfolioPage() {
   }).join('')
 
   return Shell(`
-    <section class="portfolio-header">
+    <section class="portfolio-header" style="--portfolio-hero-image: url('${siteData.heroImage}')">
       <div class="page-container">
         <p class="page-eyebrow">Trabajo seleccionado</p>
         <h1>Portafolio</h1>

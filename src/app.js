@@ -1,5 +1,6 @@
 import { siteData } from './data/siteData.js'
 import { Header } from './components/Header.js'
+import { HomeIntro } from './components/HomeIntro.js'
 import { Hero } from './components/Hero.js'
 import { Projects } from './components/Projects.js'
 import { Benefits, Contact, ServicesShowcase, Testimonials } from './components/ContentSections.js'
@@ -10,10 +11,13 @@ export function createApp(root) {
   function render() {
     const route = getRoute()
     document.body.classList.remove('nav-is-open')
+    document.body.classList.remove('intro-is-running')
     root.innerHTML = renderRoute(route)
 
     setupNavigation()
     setupContactForm()
+
+    if (route.page === 'home') setupHomeIntro()
 
     if (route.page === 'home' || route.page === 'contacto' || route.page === 'servicios') {
       setupServiceShowcase()
@@ -51,7 +55,7 @@ function getRoute() {
 function renderRoute(route) {
   if (route.page === 'home' || route.page === 'contacto' || route.page === 'servicios') {
     document.title = 'ÁREA | Arquitectura & Diseño'
-    return renderHome()
+    return renderHome(route.page === 'home')
   }
 
   if (route.page === 'nosotros') {
@@ -82,8 +86,9 @@ function renderRoute(route) {
   return NotFoundPage()
 }
 
-function renderHome() {
+function renderHome(showIntro = false) {
   return `
+    ${showIntro ? HomeIntro() : ''}
     ${Header()}
     <main>
       ${Hero(siteData)}
@@ -95,6 +100,31 @@ function renderHome() {
     </main>
     ${Footer(siteData.services)}
   `
+}
+
+function setupHomeIntro() {
+  const intro = document.querySelector('.home-intro')
+  if (!intro) return
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    intro.remove()
+    return
+  }
+
+  document.body.classList.add('intro-is-running')
+  let fallbackTimer
+
+  const finishIntro = () => {
+    window.clearTimeout(fallbackTimer)
+    document.body.classList.remove('intro-is-running')
+    intro.remove()
+  }
+
+  intro.addEventListener('animationend', (event) => {
+    if (event.target === intro && event.animationName === 'home-intro-exit') finishIntro()
+  })
+
+  fallbackTimer = window.setTimeout(finishIntro, 3300)
 }
 
 function setupNavigation() {

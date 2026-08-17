@@ -40,6 +40,7 @@
 
 .about-page .page-hero,
 .project-page .page-hero {
+  height: 420px;
   min-height: 420px;
 }
 
@@ -523,11 +524,14 @@
 }
 
 .portfolio-header {
-  min-height: 360px;
+  height: 420px;
+  min-height: 420px;
   display: flex;
   align-items: flex-end;
-  background: radial-gradient(circle at 82% 12%, #2a3038, var(--navy-deep) 47%);
-  padding: 140px 0 70px;
+  background-image: linear-gradient(90deg, rgba(8, 12, 17, 0.82), rgba(8, 12, 17, 0.34) 70%), linear-gradient(0deg, rgba(8, 12, 17, 0.74), rgba(8, 12, 17, 0.12) 65%), var(--portfolio-hero-image);
+  background-position: center;
+  background-size: cover;
+  padding: 0 0 70px;
 }
 
 .portfolio-header h1 {
@@ -911,11 +915,13 @@
 
   .about-page .page-hero,
   .project-page .page-hero {
+    height: 380px;
     min-height: 380px;
   }
 
   .portfolio-header {
-    min-height: 330px;
+    height: 380px;
+    min-height: 380px;
   }
 
   .page-hero h1 {
@@ -1025,6 +1031,7 @@
 
   .about-page .page-hero,
   .project-page .page-hero {
+    height: 320px;
     min-height: 320px;
   }
 
@@ -1240,8 +1247,9 @@
   }
 
   .portfolio-header {
-    min-height: 300px;
-    padding-bottom: 52px;
+    height: 320px;
+    min-height: 320px;
+    padding: 0 0 52px;
   }
 
   .portfolio-header h1 {
