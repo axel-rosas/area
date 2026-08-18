@@ -665,7 +665,7 @@
   cursor: pointer;
 }
 
-.portfolio-card[hidden] {
+.portfolio-page .portfolio-card[hidden] {
   display: none;
 }
 
