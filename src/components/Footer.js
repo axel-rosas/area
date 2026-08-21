@@ -1,8 +1,18 @@
+/** Pie global del sitio, separado para compartirlo entre home y páginas internas. */
+
+// `./Brand.js` es una ruta hermana dentro de `src/components/`.
 import { brandMark, brandSymbol } from './Brand.js'
 
+/**
+ * @param {Array<object>} services - Servicios cuyos `id` y `name` crean enlaces.
+ * @returns {string} Pie de página completo.
+ */
 export function Footer(services) {
+  // Convierte el catálogo en elementos `<li>` y los concatena sin comas.
   const serviceLinks = services.map((service) => `<li><a href="#/servicio/${service.id}">${service.name}</a></li>`).join('')
 
+  // Las columnas son navegación secundaria. El enlace `href="#"` de privacidad
+  // es actualmente un marcador y deberá apuntar a una ruta legal real.
   return `
     <footer class="site-footer">
       <div class="footer-inner">

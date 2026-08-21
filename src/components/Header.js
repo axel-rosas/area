@@ -1,13 +1,27 @@
+/** Encabezado compartido por todas las rutas del sitio. */
+
+// Ruta hermana: ambos archivos están dentro de `src/components/`.
 import { brandMark, brandSymbol } from './Brand.js'
+// `..` sube a `src/` para entrar en las carpetas `utils`, `data` y `assets`.
 import { icon } from '../utils/icons.js'
 import { services } from '../data/siteData.js'
+// Importación default: Vite devuelve la URL pública del SVG de flecha inferior.
 import downIcon from '../assets/icons/abajo.svg'
 
+/**
+ * Genera el encabezado y sus enlaces de navegación.
+ * @param {boolean} showName - Mantiene visible “ÁREA” en páginas internas.
+ * @returns {string} Encabezado como HTML.
+ */
 export function Header(showName = false) {
+  // `map` convierte cada servicio en enlace; `join('')` elimina las comas que
+  // aparecerían al interpolar directamente un array dentro de una cadena.
   const serviceLinks = services
     .map((service) => `<a href="#/servicio/${service.id}">${service.name}</a>`)
     .join('')
 
+  // Los href comienzan con `#/`: el hash router de `app.js` los interpreta sin
+  // solicitar otro documento al servidor. ARIA describe controles e imágenes.
   return `
     <header class="site-header">
       <a class="header-symbol" href="#/" aria-label="Ir al inicio">

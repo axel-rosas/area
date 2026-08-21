@@ -1,17 +1,34 @@
 <!doctype html>
+<!-- `lang="es"` informa a lectores de pantalla y buscadores que el contenido está en español. -->
 <html lang="es">
   <head>
+    <!-- UTF-8 permite mostrar correctamente acentos, eñes y símbolos. -->
     <meta charset="UTF-8" />
+    <!-- Hace que el ancho lógico coincida con el dispositivo y habilita el diseño responsive. -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="ÁREA, estudio de arquitectura y diseño. Creamos espacios funcionales con identidad." />
+    <!-- Resumen utilizado por buscadores y vistas previas al compartir el sitio. -->
+    <meta
+      name="description"
+      content="ÁREA, estudio de arquitectura y diseño. Creamos espacios funcionales con identidad."
+    />
+    <!-- Sugiere al navegador el color de su barra o interfaz alrededor de la página. -->
     <meta name="theme-color" content="#071326" />
+    <!-- Estas conexiones anticipadas reducen el tiempo necesario para descargar la tipografía. -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" />
+    <!-- Descarga desde Google Fonts los pesos normal e itálico de Poppins usados por el CSS. -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Título inicial de la pestaña; `app.js` lo actualiza al cambiar de página. -->
     <title>ÁREA | Arquitectura &amp; Diseño</title>
   </head>
   <body>
+    <!-- Contenedor raíz: JavaScript inserta aquí todo el HTML de la ruta actual. -->
     <div id="app"></div>
+    <!-- `type="module"` habilita `import`/`export` y ejecuta el script en modo estricto. -->
+    <!-- La ruta comienza con `/` porque Vite la resuelve desde la raíz del servidor de desarrollo. -->
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>

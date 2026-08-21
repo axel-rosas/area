@@ -1,3 +1,18 @@
+/*
+ * ESTILOS DE PÁGINAS INTERNAS
+ * ===========================
+ *
+ * `src/main.js` importa este archivo después de `style.css`. Por la cascada,
+ * una regla de igual especificidad escrita aquí puede complementar/sobrescribir
+ * una global anterior. Se separó para mantener cerca los estilos de AboutPage,
+ * ServicePage, PortfolioPage, ProjectPage y NotFoundPage, todos definidos en
+ * `src/components/InternalPages.js`.
+ *
+ * Convención de nombres: prefijos como `about-`, `portfolio-` y `project-`
+ * indican la página dueña; `page-` e `internal-` indican piezas compartidas.
+ */
+
+/* BASE INTERNA: ancho de lectura, espaciado vertical y marca del header. */
 .page-container {
   width: min(1130px, calc(100% - 80px));
   margin-inline: auto;
@@ -27,6 +42,7 @@
   padding-block: 110px;
 }
 
+/* HERO INTERNO: imagen por custom property, overlays y tipografía adaptable. */
 .page-hero {
   position: relative;
   min-height: 68svh;
@@ -91,6 +107,7 @@
   line-height: 1.5;
 }
 
+/* PÁGINA DE SERVICIO: introducción textual y encabezados compartidos. */
 .recognition-section h2 {
   font-size: clamp(31px, 3.4vw, 50px);
   font-weight: 300;
@@ -108,6 +125,7 @@
   line-height: 1.75;
 }
 
+/* PÁGINA NOSOTROS: historia, filosofía, misión, visión y valores. */
 .about-page .page-hero h1 .about-title-logo {
   display: block;
   width: min(500px, 65vw);
@@ -226,6 +244,7 @@
   line-height: 1.75;
 }
 
+/* TARJETAS DE ETAPAS: proceso numerado de cada servicio. */
 .values-grid,
 .stages-grid {
   display: grid;
@@ -283,6 +302,7 @@
   color: var(--orange);
 }
 
+/* CONTENIDO CORPORATIVO ADICIONAL: valores, promesa y lista de servicios. */
 .about-values-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -401,6 +421,7 @@
   line-height: 1.7;
 }
 
+/* BLOQUES LEGADOS/REUTILIZABLES para equipo y reconocimientos futuros. */
 .team-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -469,6 +490,7 @@
   font-size: 12px;
 }
 
+/* GALERÍA DE SERVICIO: enlaces visuales hacia proyectos relacionados. */
 .service-gallery {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -523,6 +545,7 @@
   border-top: 1px solid rgba(255, 255, 255, 0.15);
 }
 
+/* PORTAFOLIO: cabecera, filtros, búsqueda, cuadrícula y paginación. */
 .portfolio-header {
   height: 420px;
   min-height: 420px;
@@ -724,6 +747,7 @@
   text-align: center;
 }
 
+/* DETALLE DE PROYECTO: narrativa, mosaico de imágenes y modal `<dialog>`. */
 .internal-section-heading {
   margin-bottom: 48px;
 }
@@ -884,6 +908,7 @@
   background: rgba(0, 0, 0, 0.55);
 }
 
+/* 404: centra el mensaje y mantiene una ruta clara de regreso. */
 .not-found {
   min-height: 80svh;
   display: flex;
@@ -900,6 +925,7 @@
   line-height: 1;
 }
 
+/* TABLET: reduce columnas y adapta dimensiones hasta 1023 px. */
 @media (max-width: 1023px) {
   .page-container {
     width: min(744px, calc(100% - 60px));
@@ -1007,6 +1033,7 @@
 
 }
 
+/* MÓVIL: apila contenido y simplifica galerías/controles hasta 767 px. */
 @media (max-width: 767px) {
   .page-container {
     width: calc(100% - 40px);

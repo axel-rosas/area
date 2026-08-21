@@ -1,7 +1,21 @@
-import { icon } from '../utils/icons.js'
+/**
+ * SECCIONES REUTILIZABLES DE CONTENIDO
+ *
+ * Se agrupan aquí porque son funciones de presentación pequeñas, sin estado y
+ * construidas con el mismo patrón: reciben datos y devuelven HTML. Separarlas de
+ * `app.js` evita que el enrutador conozca el detalle de cada etiqueta.
+ */
 
+// Ruta `../utils/icons.js`: sube de `components` a `src` y entra en `utils`.
+import { icon } from "../utils/icons.js";
+
+/** @param {Array<object>} services @returns {string} Tarjetas de servicios. */
 export function ServicesShowcase(services) {
-  const cards = services.map((service) => `
+  // Cada objeto se transforma en `<article>` accesible por teclado (`tabindex`);
+  // `join('')` combina luego el array sin insertar comas entre las tarjetas.
+  const cards = services
+    .map(
+      (service) => `
     <article class="service-card" tabindex="0" aria-expanded="false">
       <img src="${service.image}" alt="${service.name}" loading="lazy" />
       <span class="service-card-shade"></span>
@@ -12,14 +26,17 @@ export function ServicesShowcase(services) {
           <div class="service-card-action-slot"></div>
           <template class="service-card-action-template">
             <a class="service-card-action" href="#/servicio/${service.id}">
-              Ver más ${icon('arrow')}
+              Ver más ${icon("arrow")}
             </a>
           </template>
         </div>
       </div>
     </article>
-  `).join('')
+  `,
+    )
+    .join("");
 
+  // El `<template>` de cada tarjeta permanece inerte hasta que `app.js` lo clona.
   return `
     <section id="servicios" class="content-section services-showcase-section" aria-labelledby="services-title">
       <div class="section-heading">
@@ -27,13 +44,19 @@ export function ServicesShowcase(services) {
       </div>
       <div class="services-card-grid">${cards}</div>
     </section>
-  `
+  `;
 }
 
+/** @param {Array<object>} benefits @returns {string} Beneficios del estudio. */
 export function Benefits(benefits) {
-  const items = benefits.map((benefit) => `
+  // El nombre lógico del icono se resuelve en `utils/icons.js`.
+  const items = benefits
+    .map(
+      (benefit) => `
     <article class="benefit-card">${icon(benefit.icon)}<p>${benefit.label}</p></article>
-  `).join('')
+  `,
+    )
+    .join("");
 
   return `
     <section id="nosotros" class="content-section benefits-section">
@@ -43,18 +66,24 @@ export function Benefits(benefits) {
       </div>
       <div class="benefit-grid">${items}</div>
     </section>
-  `
+  `;
 }
 
+/** @param {Array<object>} testimonials @returns {string} Testimonios de clientes. */
 export function Testimonials(testimonials) {
-  const cards = testimonials.map((testimonial) => `
+  // `projectSlug` crea una relación navegable hacia el proyecto citado.
+  const cards = testimonials
+    .map(
+      (testimonial) => `
     <article class="testimonial-card">
       <h3>${testimonial.name}</h3>
       <p class="testimonial-company">${testimonial.company}</p>
       <blockquote>${testimonial.quote}</blockquote>
       <a href="#/proyecto/${testimonial.projectSlug}">Proyecto</a>
     </article>
-  `).join('')
+  `,
+    )
+    .join("");
 
   return `
     <section class="content-section testimonials-section" aria-labelledby="testimonials-title">
@@ -64,12 +93,22 @@ export function Testimonials(testimonials) {
       </div>
       <div class="testimonial-grid">${cards}</div>
     </section>
-  `
+  `;
 }
 
+/**
+ * Genera la sección de contacto compartida por varias páginas.
+ * @param {{services: Array<object>}} data - Se desestructura para usar `services`.
+ * @returns {string} Formulario, cobertura y datos de contacto.
+ */
 export function Contact({ services }) {
-  const options = services.map((service) => `<option value="${service.id}">${service.name}</option>`).join('')
+  // Crea opciones de `<select>` a partir de la misma fuente de datos del resto del sitio.
+  const options = services
+    .map((service) => `<option value="${service.id}">${service.name}</option>`)
+    .join("");
 
+  // `novalidate` impide la validación automática al enviar; `app.js` llama
+  // explícitamente `checkValidity`/`reportValidity` para controlar el mensaje.
   return `
     <section id="contacto" class="content-section contact-section" aria-labelledby="contact-title">
       <h2 id="contact-title">Hablemos de <span>tu proyecto</span></h2>
@@ -86,25 +125,23 @@ export function Contact({ services }) {
           <div class="form-footer"><p class="form-status" role="status"></p><button class="outline-button" type="submit">Enviar mensaje</button></div>
         </form>
         <div class="contact-location">
-          <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7525.205144081373!2d-99.13846369604799!3d19.429570335690862!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1f92af577b44b%3A0xdb290ed58ba64e40!2sAlameda%20Central!5e0!3m2!1ses-419!2smx!4v1786993366131!5m2!1ses-419!2smx"
-            width="600"
-            height="450"
-            style="border: 0"
-            allowfullscreen
-            loading="lazy"
-            referrerpolicy="strict-origin-when-cross-origin"
-            title="Ubicación de ÁREA cerca de Alameda Central"
-          ></iframe>
-          <div class="contact-detail">${icon('pin')}<p>Una calle de un lugar de por ahí.</p></div>
-          <div class="contact-detail">${icon('clock')}<p>Lunes a viernes<br />9:00 - 18:00</p></div>
+          <div class="contact-coverage">
+            ${icon("pin")}
+            <div>
+              <p class="contact-coverage-label">Cobertura nacional</p>
+              <p>Ofrecemos nuestros servicios en toda la República Mexicana.</p>
+            </div>
+          </div>
           <div class="contact-social">
-            <a href="https://instagram.com" target="_blank" rel="noreferrer" aria-label="Instagram">${icon('instagram')}</a>
-            <a href="https://wa.me/525500000000" target="_blank" rel="noreferrer" aria-label="WhatsApp">${icon('whatsapp')}</a>
-            <a href="mailto:hola@area.mx" aria-label="Correo electrónico">${icon('mail')}</a>
+            <a href="https://instagram.com" target="_blank" rel="noreferrer" aria-label="Instagram">${icon("instagram")}</a>
+            <a href="https://www.facebook.com/people/%C3%81REA-Arquitectura-Dise%C3%B1o/100063890827340/" target="_blank" rel="noreferrer" aria-label="Facebook">
+            ${icon("facebook")}</a>
+            <a href="https://wa.me/525500000000" target="_blank" rel="noreferrer" aria-label="WhatsApp">${icon("whatsapp")}</a>
+            <a href="mailto:hola@somosarea.com.mx" aria-label="Correo electrónico">
+            ${icon("mail")}</a>
           </div>
         </div>
       </div>
     </section>
-  `
+  `;
 }

@@ -1,505 +1,934 @@
-import homeHero from '../assets/images/site/home-hero.jpg'
-import aboutHero from '../assets/images/site/about-hero.jpg'
-import aboutStudio from '../assets/images/site/about-studio.jpg'
-import architectureImage from '../assets/images/site/service-architecture.jpg'
-import executiveImage from '../assets/images/site/service-executive-projects.jpg'
-import interiorImage from '../assets/images/site/service-interior-design.jpg'
-import remodelingImage from '../assets/images/site/service-remodeling.jpg'
-import constructionImage from '../assets/images/site/service-construction.jpg'
-import supervisionImage from '../assets/images/site/service-supervision.jpg'
+/**
+ * FUENTE ÚNICA DE DATOS DEL SITIO
+ *
+ * Este módulo contiene contenido y referencias a imágenes, pero no genera HTML.
+ * Separarlo de los componentes permite actualizar textos/proyectos sin tocar la
+ * lógica de presentación, y reutilizar los mismos datos en home, menú, filtros,
+ * páginas internas y footer sin duplicarlos.
+ *
+ * Rutas de todos los imports de este archivo:
+ * - El archivo actual está en `src/data/siteData.js`.
+ * - `..` sube de `src/data/` a `src/`.
+ * - Después `assets/images/...` entra a la imagen indicada.
+ * Vite sustituye cada import default por la URL optimizada del asset compilado.
+ */
 
-import casaUmbralCover from '../assets/images/projects/casa-umbral/cover.jpg'
-import casaUmbral01 from '../assets/images/projects/casa-umbral/detail-01.jpg'
-import casaUmbral02 from '../assets/images/projects/casa-umbral/detail-02.jpg'
-import patioLuzCover from '../assets/images/projects/patio-luz/cover.jpg'
-import patioLuz01 from '../assets/images/projects/patio-luz/detail-01.jpg'
-import patioLuz02 from '../assets/images/projects/patio-luz/detail-02.jpg'
-import residenciaEncinoCover from '../assets/images/projects/residencia-encino/cover.jpg'
-import residenciaEncino01 from '../assets/images/projects/residencia-encino/detail-01.jpg'
-import residenciaEncino02 from '../assets/images/projects/residencia-encino/detail-02.jpg'
-import casaNorteCover from '../assets/images/projects/casa-norte/cover.jpg'
-import casaNorte01 from '../assets/images/projects/casa-norte/detail-01.jpg'
-import casaNorte02 from '../assets/images/projects/casa-norte/detail-02.jpg'
-import cocinaLineaCover from '../assets/images/projects/cocina-linea/cover.jpg'
-import cocinaLinea01 from '../assets/images/projects/cocina-linea/detail-01.jpg'
-import cocinaLinea02 from '../assets/images/projects/cocina-linea/detail-02.jpg'
-import casaClaraCover from '../assets/images/projects/casa-clara/cover.jpg'
-import casaClara01 from '../assets/images/projects/casa-clara/detail-01.jpg'
-import casaClara02 from '../assets/images/projects/casa-clara/detail-02.jpg'
-import oficinasPrismaCover from '../assets/images/projects/oficinas-prisma/cover.jpg'
-import oficinasPrisma01 from '../assets/images/projects/oficinas-prisma/detail-01.jpg'
-import oficinasPrisma02 from '../assets/images/projects/oficinas-prisma/detail-02.jpg'
-import casaMarCover from '../assets/images/projects/casa-mar/cover.jpg'
-import casaMar01 from '../assets/images/projects/casa-mar/detail-01.jpg'
-import casaMar02 from '../assets/images/projects/casa-mar/detail-02.jpg'
-import pabellonUnoCover from '../assets/images/projects/pabellon-uno/cover.jpg'
-import pabellonUno01 from '../assets/images/projects/pabellon-uno/detail-01.jpg'
-import pabellonUno02 from '../assets/images/projects/pabellon-uno/detail-02.jpg'
+// Imágenes generales y de servicios: `src/assets/images/site/`.
+import homeHero from "../assets/images/site/home-hero.jpg";
+import aboutHero from "../assets/images/site/about-hero.jpg";
+import aboutStudio from "../assets/images/site/about-studio.jpg";
+import architectureImage from "../assets/images/site/service-architecture.jpg";
+import executiveImage from "../assets/images/site/service-executive-projects.jpg";
+import interiorImage from "../assets/images/site/service-interior-design.jpg";
+import remodelingImage from "../assets/images/site/service-remodeling.jpg";
+import constructionImage from "../assets/images/site/service-construction.jpg";
+import supervisionImage from "../assets/images/site/service-supervision.jpg";
 
+// Proyectos: cada carpeta usa `cover.jpg` para tarjeta/hero y `detail-XX.jpg`
+// para galería. Este convenio hace predecible la ubicación de cualquier imagen.
+// Casa Umbral: `src/assets/images/projects/casa-umbral/`.
+import casaUmbralCover from "../assets/images/projects/casa-umbral/cover.jpg";
+import casaUmbral01 from "../assets/images/projects/casa-umbral/detail-01.jpg";
+import casaUmbral02 from "../assets/images/projects/casa-umbral/detail-02.jpg";
+// Patio Luz: `src/assets/images/projects/patio-luz/`.
+import patioLuzCover from "../assets/images/projects/patio-luz/cover.jpg";
+import patioLuz01 from "../assets/images/projects/patio-luz/detail-01.jpg";
+import patioLuz02 from "../assets/images/projects/patio-luz/detail-02.jpg";
+// Residencia Encino: `src/assets/images/projects/residencia-encino/`.
+import residenciaEncinoCover from "../assets/images/projects/residencia-encino/cover.jpg";
+import residenciaEncino01 from "../assets/images/projects/residencia-encino/detail-01.jpg";
+import residenciaEncino02 from "../assets/images/projects/residencia-encino/detail-02.jpg";
+// Casa Norte: `src/assets/images/projects/casa-norte/`.
+import casaNorteCover from "../assets/images/projects/casa-norte/cover.jpg";
+import casaNorte01 from "../assets/images/projects/casa-norte/detail-01.jpg";
+import casaNorte02 from "../assets/images/projects/casa-norte/detail-02.jpg";
+// Cocina Línea: `src/assets/images/projects/cocina-linea/`.
+import cocinaLineaCover from "../assets/images/projects/cocina-linea/cover.jpg";
+import cocinaLinea01 from "../assets/images/projects/cocina-linea/detail-01.jpg";
+import cocinaLinea02 from "../assets/images/projects/cocina-linea/detail-02.jpg";
+// Casa Clara: `src/assets/images/projects/casa-clara/`.
+import casaClaraCover from "../assets/images/projects/casa-clara/cover.jpg";
+import casaClara01 from "../assets/images/projects/casa-clara/detail-01.jpg";
+import casaClara02 from "../assets/images/projects/casa-clara/detail-02.jpg";
+// Oficinas Prisma: `src/assets/images/projects/oficinas-prisma/`.
+import oficinasPrismaCover from "../assets/images/projects/oficinas-prisma/cover.jpg";
+import oficinasPrisma01 from "../assets/images/projects/oficinas-prisma/detail-01.jpg";
+import oficinasPrisma02 from "../assets/images/projects/oficinas-prisma/detail-02.jpg";
+// Casa Mar: `src/assets/images/projects/casa-mar/`.
+import casaMarCover from "../assets/images/projects/casa-mar/cover.jpg";
+import casaMar01 from "../assets/images/projects/casa-mar/detail-01.jpg";
+import casaMar02 from "../assets/images/projects/casa-mar/detail-02.jpg";
+// Pabellón Uno: `src/assets/images/projects/pabellon-uno/`.
+import pabellonUnoCover from "../assets/images/projects/pabellon-uno/cover.jpg";
+import pabellonUno01 from "../assets/images/projects/pabellon-uno/detail-01.jpg";
+import pabellonUno02 from "../assets/images/projects/pabellon-uno/detail-02.jpg";
+
+/**
+ * Catálogo de servicios.
+ * Campos:
+ * - `id`: identificador estable para URLs y relaciones; no usa espacios/acentos.
+ * - `name`: título completo visible.
+ * - `shortName`: versión compacta para tarjetas y filtros.
+ * - `image`: URL importada, no texto escrito manualmente.
+ * - `description`/`introduction`: resumen breve y desarrollo largo.
+ * - `stages`: pasos que `ServicePage` enumera automáticamente.
+ */
 export const services = [
+  // Cada bloque `{ ... }` es un objeto; la coma permite añadir el siguiente.
   {
-    id: 'arquitectura',
-    name: 'Arquitectura',
-    shortName: 'Arquitectura',
+    id: "arquitectura",
+    name: "Arquitectura",
+    shortName: "Arquitectura",
     image: architectureImage,
-    description: 'Diseñamos espacios que responden a su entorno y a la forma en que serán habitados. Cada propuesta equilibra funcionalidad, identidad y una visión arquitectónica duradera.',
-    introduction: 'De la primera intuición al espacio construido, desarrollamos proyectos residenciales y comerciales que integran contexto, estructura y experiencia. Nuestro proceso convierte necesidades concretas en una arquitectura clara y sensible.',
-    stages: ['Diagnóstico del sitio', 'Concepto y anteproyecto', 'Desarrollo arquitectónico', 'Coordinación integral'],
+    description:
+      "Diseñamos espacios que responden a su entorno y a la forma en que serán habitados. Cada propuesta equilibra funcionalidad, identidad y una visión arquitectónica duradera.",
+    introduction:
+      "De la primera intuición al espacio construido, desarrollamos proyectos residenciales y comerciales que integran contexto, estructura y experiencia. Nuestro proceso convierte necesidades concretas en una arquitectura clara y sensible.",
+    stages: [
+      "Diagnóstico del sitio",
+      "Concepto y anteproyecto",
+      "Desarrollo arquitectónico",
+      "Coordinación integral",
+    ],
   },
   {
-    id: 'proyectos-ejecutivos',
-    name: 'Proyectos ejecutivos',
-    shortName: 'Proyecto ejecutivo',
+    id: "proyectos-ejecutivos",
+    name: "Proyectos ejecutivos",
+    shortName: "Proyecto ejecutivo",
     image: executiveImage,
-    description: 'Traducimos una idea en planos, especificaciones y soluciones constructivas precisas para que cada etapa de la obra avance con claridad y control.',
-    introduction: 'Documentamos cada decisión necesaria para construir con certeza. Coordinamos arquitectura, instalaciones, detalles, materiales y catálogos para reducir imprevistos durante la ejecución.',
-    stages: ['Levantamiento', 'Planos constructivos', 'Coordinación técnica', 'Catálogo de conceptos'],
+    description:
+      "Traducimos una idea en planos, especificaciones y soluciones constructivas precisas para que cada etapa de la obra avance con claridad y control.",
+    introduction:
+      "Documentamos cada decisión necesaria para construir con certeza. Coordinamos arquitectura, instalaciones, detalles, materiales y catálogos para reducir imprevistos durante la ejecución.",
+    stages: [
+      "Levantamiento",
+      "Planos constructivos",
+      "Coordinación técnica",
+      "Catálogo de conceptos",
+    ],
   },
   {
-    id: 'diseno-interiores',
-    name: 'Diseño de interiores',
-    shortName: 'Interiorismo',
+    id: "diseno-interiores",
+    name: "Diseño de interiores",
+    shortName: "Interiorismo",
     image: interiorImage,
-    description: 'Creamos atmósferas coherentes mediante materiales, iluminación, mobiliario y color, siempre pensando en el uso cotidiano de cada espacio.',
-    introduction: 'Entendemos el interior como una extensión de quienes lo habitan. Diseñamos recorridos, mobiliario, iluminación y paletas materiales que construyen una experiencia unificada.',
-    stages: ['Concepto espacial', 'Materialidad', 'Iluminación', 'Mobiliario y detalle'],
+    description:
+      "Creamos atmósferas coherentes mediante materiales, iluminación, mobiliario y color, siempre pensando en el uso cotidiano de cada espacio.",
+    introduction:
+      "Entendemos el interior como una extensión de quienes lo habitan. Diseñamos recorridos, mobiliario, iluminación y paletas materiales que construyen una experiencia unificada.",
+    stages: [
+      "Concepto espacial",
+      "Materialidad",
+      "Iluminación",
+      "Mobiliario y detalle",
+    ],
   },
   {
-    id: 'remodelaciones',
-    name: 'Remodelaciones',
-    shortName: 'Remodelación',
+    id: "remodelaciones",
+    name: "Remodelaciones",
+    shortName: "Remodelación",
     image: remodelingImage,
-    description: 'Reinterpretamos espacios existentes para mejorar su distribución, desempeño y carácter, aprovechando al máximo aquello que ya funciona.',
-    introduction: 'Partimos de una lectura cuidadosa de lo existente para detectar oportunidades. Conservamos lo valioso, corregimos limitaciones y damos una nueva vida al espacio con intervenciones precisas.',
-    stages: ['Evaluación del inmueble', 'Estrategia de intervención', 'Proyecto y presupuesto', 'Ejecución por etapas'],
+    description:
+      "Reinterpretamos espacios existentes para mejorar su distribución, desempeño y carácter, aprovechando al máximo aquello que ya funciona.",
+    introduction:
+      "Partimos de una lectura cuidadosa de lo existente para detectar oportunidades. Conservamos lo valioso, corregimos limitaciones y damos una nueva vida al espacio con intervenciones precisas.",
+    stages: [
+      "Evaluación del inmueble",
+      "Estrategia de intervención",
+      "Proyecto y presupuesto",
+      "Ejecución por etapas",
+    ],
   },
   {
-    id: 'construccion',
-    name: 'Construcción',
-    shortName: 'Construcción',
+    id: "construccion",
+    name: "Construcción",
+    shortName: "Construcción",
     image: constructionImage,
-    description: 'Coordinamos la ejecución integral del proyecto con procesos ordenados, comunicación constante y especial atención a cada detalle.',
-    introduction: 'Convertimos el proyecto en obra mediante una planeación transparente, equipos especializados y seguimiento continuo. Cuidamos tiempo, costo y calidad con la misma atención.',
-    stages: ['Planeación', 'Presupuesto y contratos', 'Ejecución', 'Entrega y cierre'],
+    description:
+      "Coordinamos la ejecución integral del proyecto con procesos ordenados, comunicación constante y especial atención a cada detalle.",
+    introduction:
+      "Convertimos el proyecto en obra mediante una planeación transparente, equipos especializados y seguimiento continuo. Cuidamos tiempo, costo y calidad con la misma atención.",
+    stages: [
+      "Planeación",
+      "Presupuesto y contratos",
+      "Ejecución",
+      "Entrega y cierre",
+    ],
   },
   {
-    id: 'supervision-obra',
-    name: 'Supervisión de obra',
-    shortName: 'Supervisión',
+    id: "supervision-obra",
+    name: "Supervisión de obra",
+    shortName: "Supervisión",
     image: supervisionImage,
-    description: 'Verificamos calidad, tiempos y apego al proyecto para anticipar decisiones y mantener el resultado final fiel a la intención de diseño.',
-    introduction: 'Acompañamos la construcción con visitas, reportes y revisiones técnicas. Nuestra supervisión mantiene alineados a diseñadores, contratistas y cliente.',
-    stages: ['Programa de visitas', 'Control de calidad', 'Reportes de avance', 'Validación de entrega'],
+    description:
+      "Verificamos calidad, tiempos y apego al proyecto para anticipar decisiones y mantener el resultado final fiel a la intención de diseño.",
+    introduction:
+      "Acompañamos la construcción con visitas, reportes y revisiones técnicas. Nuestra supervisión mantiene alineados a diseñadores, contratistas y cliente.",
+    stages: [
+      "Programa de visitas",
+      "Control de calidad",
+      "Reportes de avance",
+      "Validación de entrega",
+    ],
   },
-]
+];
 
+/**
+ * Catálogo de proyectos.
+ * `serviceId` relaciona cada proyecto con `services.id` (como llave foránea).
+ * `slug` identifica la URL legible; `id` identifica la tarjeta; `cover` es la
+ * imagen principal y `gallery` conserva el orden mostrado por la galería.
+ * Los últimos tres campos forman la narrativa de la página de detalle.
+ */
 export const projects = [
+  // Este primer registro funciona también como ejemplo del esquema descrito arriba.
   {
     id: 1,
-    slug: 'casa-umbral',
-    name: 'Casa Umbral',
-    serviceId: 'diseno-interiores',
-    location: 'Ciudad de México',
-    year: '2026',
+    slug: "casa-umbral",
+    name: "Casa Umbral",
+    serviceId: "diseno-interiores",
+    location: "Ciudad de México",
+    year: "2026",
     cover: casaUmbralCover,
-    gallery: [casaUmbralCover, casaUmbral01, casaUmbral02, casaUmbral01, casaUmbralCover, casaUmbral02],
-    description: 'Una residencia concebida como refugio urbano, donde la luz indirecta y una paleta oscura definen espacios serenos para la convivencia cotidiana.',
-    problem: 'La vivienda tenía áreas desconectadas y poca continuidad visual, además de requerir soluciones de almacenamiento sin saturar los espacios.',
-    solution: 'Unificamos materiales, integramos mobiliario a medida y usamos la iluminación como hilo conductor para articular las distintas áreas de la casa.',
+    gallery: [
+      casaUmbralCover,
+      casaUmbral01,
+      casaUmbral02,
+      casaUmbral01,
+      casaUmbralCover,
+      casaUmbral02,
+    ],
+    description:
+      "Una residencia concebida como refugio urbano, donde la luz indirecta y una paleta oscura definen espacios serenos para la convivencia cotidiana.",
+    problem:
+      "La vivienda tenía áreas desconectadas y poca continuidad visual, además de requerir soluciones de almacenamiento sin saturar los espacios.",
+    solution:
+      "Unificamos materiales, integramos mobiliario a medida y usamos la iluminación como hilo conductor para articular las distintas áreas de la casa.",
   },
   {
     id: 2,
-    slug: 'patio-luz',
-    name: 'Patio Luz',
-    serviceId: 'remodelaciones',
-    location: 'Querétaro',
-    year: '2025',
+    slug: "patio-luz",
+    name: "Patio Luz",
+    serviceId: "remodelaciones",
+    location: "Querétaro",
+    year: "2025",
     cover: patioLuzCover,
-    gallery: [patioLuzCover, patioLuz01, patioLuz02, patioLuz01, patioLuz02, patioLuzCover],
-    description: 'La remodelación transforma un espacio de circulación en el centro vivo de la casa mediante vegetación, textura y luz natural.',
-    problem: 'El acceso era oscuro y funcionaba únicamente como paso, sin relación con las áreas sociales ni con el jardín de la vivienda.',
-    solution: 'Abrimos visuales, incorporamos un jardín interior y diseñamos una secuencia de materiales cálidos que acompaña el recorrido.',
+    gallery: [
+      patioLuzCover,
+      patioLuz01,
+      patioLuz02,
+      patioLuz01,
+      patioLuz02,
+      patioLuzCover,
+    ],
+    description:
+      "La remodelación transforma un espacio de circulación en el centro vivo de la casa mediante vegetación, textura y luz natural.",
+    problem:
+      "El acceso era oscuro y funcionaba únicamente como paso, sin relación con las áreas sociales ni con el jardín de la vivienda.",
+    solution:
+      "Abrimos visuales, incorporamos un jardín interior y diseñamos una secuencia de materiales cálidos que acompaña el recorrido.",
   },
   {
     id: 3,
-    slug: 'residencia-encino',
-    name: 'Residencia Encino',
-    serviceId: 'arquitectura',
-    location: 'Valle de Bravo',
-    year: '2025',
+    slug: "residencia-encino",
+    name: "Residencia Encino",
+    serviceId: "arquitectura",
+    location: "Valle de Bravo",
+    year: "2025",
     cover: residenciaEncinoCover,
-    gallery: [residenciaEncinoCover, residenciaEncino01, residenciaEncino02, residenciaEncino01, residenciaEncinoCover, residenciaEncino02],
-    description: 'Una casa abierta al paisaje que combina proporciones generosas, materiales naturales y una distribución flexible para recibir a la familia.',
-    problem: 'El terreno pedía aprovechar las vistas sin comprometer privacidad ni confort térmico durante las distintas estaciones del año.',
-    solution: 'Orientamos los volúmenes hacia el paisaje, generamos patios protegidos y usamos aleros para controlar la entrada directa del sol.',
+    gallery: [
+      residenciaEncinoCover,
+      residenciaEncino01,
+      residenciaEncino02,
+      residenciaEncino01,
+      residenciaEncinoCover,
+      residenciaEncino02,
+    ],
+    description:
+      "Una casa abierta al paisaje que combina proporciones generosas, materiales naturales y una distribución flexible para recibir a la familia.",
+    problem:
+      "El terreno pedía aprovechar las vistas sin comprometer privacidad ni confort térmico durante las distintas estaciones del año.",
+    solution:
+      "Orientamos los volúmenes hacia el paisaje, generamos patios protegidos y usamos aleros para controlar la entrada directa del sol.",
   },
   {
     id: 4,
-    slug: 'casa-norte',
-    name: 'Casa Norte',
-    serviceId: 'arquitectura',
-    location: 'Monterrey',
-    year: '2024',
+    slug: "casa-norte",
+    name: "Casa Norte",
+    serviceId: "arquitectura",
+    location: "Monterrey",
+    year: "2024",
     cover: casaNorteCover,
-    gallery: [casaNorteCover, casaNorte01, casaNorte02, casaNorte01, casaNorteCover, casaNorte02],
-    description: 'Dos volúmenes sobrios enmarcan el acceso y protegen los interiores, construyendo una presencia contundente sobre una calle residencial.',
-    problem: 'La orientación y el clima exigían reducir la ganancia térmica sin perder iluminación natural ni contacto con el exterior.',
-    solution: 'Diseñamos fachadas profundas, celosías y aperturas estratégicas que equilibran sombra, ventilación y privacidad.',
+    gallery: [
+      casaNorteCover,
+      casaNorte01,
+      casaNorte02,
+      casaNorte01,
+      casaNorteCover,
+      casaNorte02,
+    ],
+    description:
+      "Dos volúmenes sobrios enmarcan el acceso y protegen los interiores, construyendo una presencia contundente sobre una calle residencial.",
+    problem:
+      "La orientación y el clima exigían reducir la ganancia térmica sin perder iluminación natural ni contacto con el exterior.",
+    solution:
+      "Diseñamos fachadas profundas, celosías y aperturas estratégicas que equilibran sombra, ventilación y privacidad.",
   },
   {
     id: 5,
-    slug: 'cocina-linea',
-    name: 'Cocina Línea',
-    serviceId: 'diseno-interiores',
-    location: 'Ciudad de México',
-    year: '2024',
+    slug: "cocina-linea",
+    name: "Cocina Línea",
+    serviceId: "diseno-interiores",
+    location: "Ciudad de México",
+    year: "2024",
     cover: cocinaLineaCover,
-    gallery: [cocinaLineaCover, cocinaLinea01, cocinaLinea02, cocinaLinea01, cocinaLineaCover, cocinaLinea02],
-    description: 'Una cocina precisa y luminosa donde cada elemento se integra en un plano continuo para facilitar el uso y ampliar visualmente el espacio.',
-    problem: 'El espacio existente tenía circulaciones reducidas, superficies insuficientes y equipos dispersos que complicaban las tareas diarias.',
-    solution: 'Concentramos servicios, liberamos el área central e incorporamos una isla de trabajo que funciona también como punto de reunión.',
+    gallery: [
+      cocinaLineaCover,
+      cocinaLinea01,
+      cocinaLinea02,
+      cocinaLinea01,
+      cocinaLineaCover,
+      cocinaLinea02,
+    ],
+    description:
+      "Una cocina precisa y luminosa donde cada elemento se integra en un plano continuo para facilitar el uso y ampliar visualmente el espacio.",
+    problem:
+      "El espacio existente tenía circulaciones reducidas, superficies insuficientes y equipos dispersos que complicaban las tareas diarias.",
+    solution:
+      "Concentramos servicios, liberamos el área central e incorporamos una isla de trabajo que funciona también como punto de reunión.",
   },
   {
     id: 6,
-    slug: 'casa-clara',
-    name: 'Casa Clara',
-    serviceId: 'remodelaciones',
-    location: 'Puebla',
-    year: '2024',
+    slug: "casa-clara",
+    name: "Casa Clara",
+    serviceId: "remodelaciones",
+    location: "Puebla",
+    year: "2024",
     cover: casaClaraCover,
-    gallery: [casaClaraCover, casaClara01, casaClara02, casaClara01, casaClaraCover, casaClara02],
-    description: 'La intervención abre la vivienda a una nueva etapa, incorporando luz, superficies continuas y una atmósfera relajada.',
-    problem: 'La distribución fragmentaba la zona social y bloqueaba la entrada de luz hacia el corazón de la casa.',
-    solution: 'Retiramos divisiones innecesarias, alineamos circulaciones y trabajamos una paleta clara que amplifica la iluminación natural.',
+    gallery: [
+      casaClaraCover,
+      casaClara01,
+      casaClara02,
+      casaClara01,
+      casaClaraCover,
+      casaClara02,
+    ],
+    description:
+      "La intervención abre la vivienda a una nueva etapa, incorporando luz, superficies continuas y una atmósfera relajada.",
+    problem:
+      "La distribución fragmentaba la zona social y bloqueaba la entrada de luz hacia el corazón de la casa.",
+    solution:
+      "Retiramos divisiones innecesarias, alineamos circulaciones y trabajamos una paleta clara que amplifica la iluminación natural.",
   },
   {
     id: 7,
-    slug: 'oficinas-prisma',
-    name: 'Oficinas Prisma',
-    serviceId: 'proyectos-ejecutivos',
-    location: 'Ciudad de México',
-    year: '2023',
+    slug: "oficinas-prisma",
+    name: "Oficinas Prisma",
+    serviceId: "proyectos-ejecutivos",
+    location: "Ciudad de México",
+    year: "2023",
     cover: oficinasPrismaCover,
-    gallery: [oficinasPrismaCover, oficinasPrisma01, oficinasPrisma02, oficinasPrisma01, oficinasPrismaCover, oficinasPrisma02],
-    description: 'Un entorno de trabajo flexible definido por transparencias, luz controlada y espacios de colaboración que se adaptan a cada jornada.',
-    problem: 'El programa requería combinar concentración, reuniones y trabajo colectivo dentro de una planta profunda.',
-    solution: 'Organizamos los espacios por gradientes de privacidad y coordinamos el proyecto ejecutivo para integrar instalaciones sin ruido visual.',
+    gallery: [
+      oficinasPrismaCover,
+      oficinasPrisma01,
+      oficinasPrisma02,
+      oficinasPrisma01,
+      oficinasPrismaCover,
+      oficinasPrisma02,
+    ],
+    description:
+      "Un entorno de trabajo flexible definido por transparencias, luz controlada y espacios de colaboración que se adaptan a cada jornada.",
+    problem:
+      "El programa requería combinar concentración, reuniones y trabajo colectivo dentro de una planta profunda.",
+    solution:
+      "Organizamos los espacios por gradientes de privacidad y coordinamos el proyecto ejecutivo para integrar instalaciones sin ruido visual.",
   },
   {
     id: 8,
-    slug: 'casa-mar',
-    name: 'Casa Mar',
-    serviceId: 'construccion',
-    location: 'Puerto Escondido',
-    year: '2023',
+    slug: "casa-mar",
+    name: "Casa Mar",
+    serviceId: "construccion",
+    location: "Puerto Escondido",
+    year: "2023",
     cover: casaMarCover,
-    gallery: [casaMarCover, casaMar01, casaMar02, casaMar01, casaMarCover, casaMar02],
-    description: 'Una vivienda de descanso construida alrededor de la brisa, las vistas y una materialidad sencilla que envejece con dignidad.',
-    problem: 'La distancia, el clima y la logística local requerían una ejecución precisa y soluciones de bajo mantenimiento.',
-    solution: 'Planeamos suministros por etapas, simplificamos sistemas constructivos y coordinamos equipos locales con supervisión constante.',
+    gallery: [
+      casaMarCover,
+      casaMar01,
+      casaMar02,
+      casaMar01,
+      casaMarCover,
+      casaMar02,
+    ],
+    description:
+      "Una vivienda de descanso construida alrededor de la brisa, las vistas y una materialidad sencilla que envejece con dignidad.",
+    problem:
+      "La distancia, el clima y la logística local requerían una ejecución precisa y soluciones de bajo mantenimiento.",
+    solution:
+      "Planeamos suministros por etapas, simplificamos sistemas constructivos y coordinamos equipos locales con supervisión constante.",
   },
   {
     id: 9,
-    slug: 'pabellon-uno',
-    name: 'Pabellón Uno',
-    serviceId: 'supervision-obra',
-    location: 'Estado de México',
-    year: '2023',
+    slug: "pabellon-uno",
+    name: "Pabellón Uno",
+    serviceId: "supervision-obra",
+    location: "Estado de México",
+    year: "2023",
     cover: pabellonUnoCover,
-    gallery: [pabellonUnoCover, pabellonUno01, pabellonUno02, pabellonUno01, pabellonUnoCover, pabellonUno02],
-    description: 'Un pabellón silencioso que combina geometría elemental y textura para crear una experiencia de pausa dentro del paisaje.',
-    problem: 'La precisión de encuentros y acabados era fundamental para mantener la claridad formal del proyecto original.',
-    solution: 'Establecimos muestras, puntos de control y revisiones semanales que permitieron corregir desviaciones antes de cada cierre de obra.',
+    gallery: [
+      pabellonUnoCover,
+      pabellonUno01,
+      pabellonUno02,
+      pabellonUno01,
+      pabellonUnoCover,
+      pabellonUno02,
+    ],
+    description:
+      "Un pabellón silencioso que combina geometría elemental y textura para crear una experiencia de pausa dentro del paisaje.",
+    problem:
+      "La precisión de encuentros y acabados era fundamental para mantener la claridad formal del proyecto original.",
+    solution:
+      "Establecimos muestras, puntos de control y revisiones semanales que permitieron corregir desviaciones antes de cada cierre de obra.",
   },
   {
     id: 10,
-    slug: 'loft-jacaranda',
-    name: 'Loft Jacaranda',
-    serviceId: 'diseno-interiores',
-    location: 'Ciudad de México',
-    year: '2026',
+    slug: "loft-jacaranda",
+    name: "Loft Jacaranda",
+    serviceId: "diseno-interiores",
+    location: "Ciudad de México",
+    year: "2026",
     cover: casaUmbralCover,
-    gallery: [casaUmbralCover, casaUmbral01, casaUmbral02, cocinaLinea01, cocinaLinea02, casaUmbral01],
-    description: 'Un interior compacto organizado mediante mobiliario continuo, iluminación cálida y una selección contenida de materiales.',
-    problem: 'La planta abierta necesitaba distinguir actividades sin perder amplitud ni bloquear el paso de la luz natural.',
-    solution: 'Diseñamos piezas multifuncionales que ordenan el espacio y generan transiciones claras entre descanso, trabajo y convivencia.',
+    gallery: [
+      casaUmbralCover,
+      casaUmbral01,
+      casaUmbral02,
+      cocinaLinea01,
+      cocinaLinea02,
+      casaUmbral01,
+    ],
+    description:
+      "Un interior compacto organizado mediante mobiliario continuo, iluminación cálida y una selección contenida de materiales.",
+    problem:
+      "La planta abierta necesitaba distinguir actividades sin perder amplitud ni bloquear el paso de la luz natural.",
+    solution:
+      "Diseñamos piezas multifuncionales que ordenan el espacio y generan transiciones claras entre descanso, trabajo y convivencia.",
   },
   {
     id: 11,
-    slug: 'casa-cobalto',
-    name: 'Casa Cobalto',
-    serviceId: 'arquitectura',
-    location: 'Guadalajara',
-    year: '2026',
+    slug: "casa-cobalto",
+    name: "Casa Cobalto",
+    serviceId: "arquitectura",
+    location: "Guadalajara",
+    year: "2026",
     cover: residenciaEncinoCover,
-    gallery: [residenciaEncinoCover, residenciaEncino01, residenciaEncino02, casaNorte01, casaNorte02, residenciaEncino01],
-    description: 'Una vivienda de patios sucesivos que protege la intimidad y mantiene una relación constante con la vegetación.',
-    problem: 'El terreno estrecho exigía llevar iluminación y ventilación a todas las áreas sin exponerlas hacia la calle.',
-    solution: 'Articulamos el programa alrededor de vacíos interiores que introducen luz, aire y vistas controladas.',
+    gallery: [
+      residenciaEncinoCover,
+      residenciaEncino01,
+      residenciaEncino02,
+      casaNorte01,
+      casaNorte02,
+      residenciaEncino01,
+    ],
+    description:
+      "Una vivienda de patios sucesivos que protege la intimidad y mantiene una relación constante con la vegetación.",
+    problem:
+      "El terreno estrecho exigía llevar iluminación y ventilación a todas las áreas sin exponerlas hacia la calle.",
+    solution:
+      "Articulamos el programa alrededor de vacíos interiores que introducen luz, aire y vistas controladas.",
   },
   {
     id: 12,
-    slug: 'terraza-olivo',
-    name: 'Terraza Olivo',
-    serviceId: 'remodelaciones',
-    location: 'Morelos',
-    year: '2026',
+    slug: "terraza-olivo",
+    name: "Terraza Olivo",
+    serviceId: "remodelaciones",
+    location: "Morelos",
+    year: "2026",
     cover: patioLuzCover,
-    gallery: [patioLuzCover, patioLuz01, patioLuz02, casaClara01, casaClara02, patioLuz01],
-    description: 'La recuperación de una terraza convierte un espacio residual en el principal punto de encuentro de la vivienda.',
-    problem: 'La zona exterior estaba desconectada de la casa y carecía de protección frente al sol y la lluvia.',
-    solution: 'Extendimos la cubierta, unificamos niveles e incorporamos vegetación y superficies resistentes para uso cotidiano.',
+    gallery: [
+      patioLuzCover,
+      patioLuz01,
+      patioLuz02,
+      casaClara01,
+      casaClara02,
+      patioLuz01,
+    ],
+    description:
+      "La recuperación de una terraza convierte un espacio residual en el principal punto de encuentro de la vivienda.",
+    problem:
+      "La zona exterior estaba desconectada de la casa y carecía de protección frente al sol y la lluvia.",
+    solution:
+      "Extendimos la cubierta, unificamos niveles e incorporamos vegetación y superficies resistentes para uso cotidiano.",
   },
   {
     id: 13,
-    slug: 'clinica-nube',
-    name: 'Clínica Nube',
-    serviceId: 'proyectos-ejecutivos',
-    location: 'Querétaro',
-    year: '2026',
+    slug: "clinica-nube",
+    name: "Clínica Nube",
+    serviceId: "proyectos-ejecutivos",
+    location: "Querétaro",
+    year: "2026",
     cover: oficinasPrismaCover,
-    gallery: [oficinasPrismaCover, oficinasPrisma01, oficinasPrisma02, cocinaLinea01, cocinaLinea02, oficinasPrisma01],
-    description: 'Un proyecto técnico para espacios de atención serenos, eficientes y fáciles de mantener.',
-    problem: 'El programa médico requería coordinar circulaciones, instalaciones especiales y estrictos criterios de operación.',
-    solution: 'Desarrollamos planos y detalles integrales para resolver cada encuentro y facilitar una ejecución ordenada.',
+    gallery: [
+      oficinasPrismaCover,
+      oficinasPrisma01,
+      oficinasPrisma02,
+      cocinaLinea01,
+      cocinaLinea02,
+      oficinasPrisma01,
+    ],
+    description:
+      "Un proyecto técnico para espacios de atención serenos, eficientes y fáciles de mantener.",
+    problem:
+      "El programa médico requería coordinar circulaciones, instalaciones especiales y estrictos criterios de operación.",
+    solution:
+      "Desarrollamos planos y detalles integrales para resolver cada encuentro y facilitar una ejecución ordenada.",
   },
   {
     id: 14,
-    slug: 'local-origen',
-    name: 'Local Origen',
-    serviceId: 'construccion',
-    location: 'Puebla',
-    year: '2025',
+    slug: "local-origen",
+    name: "Local Origen",
+    serviceId: "construccion",
+    location: "Puebla",
+    year: "2025",
     cover: cocinaLineaCover,
-    gallery: [cocinaLineaCover, cocinaLinea01, cocinaLinea02, oficinasPrisma01, casaUmbral02, cocinaLinea01],
-    description: 'Un espacio comercial construido con sistemas sencillos y una materialidad directa que refuerza la identidad de la marca.',
-    problem: 'El calendario de apertura era reducido y exigía coordinar proveedores sin comprometer los acabados principales.',
-    solution: 'Organizamos frentes simultáneos de trabajo y definimos controles de calidad para cada etapa de ejecución.',
+    gallery: [
+      cocinaLineaCover,
+      cocinaLinea01,
+      cocinaLinea02,
+      oficinasPrisma01,
+      casaUmbral02,
+      cocinaLinea01,
+    ],
+    description:
+      "Un espacio comercial construido con sistemas sencillos y una materialidad directa que refuerza la identidad de la marca.",
+    problem:
+      "El calendario de apertura era reducido y exigía coordinar proveedores sin comprometer los acabados principales.",
+    solution:
+      "Organizamos frentes simultáneos de trabajo y definimos controles de calidad para cada etapa de ejecución.",
   },
   {
     id: 15,
-    slug: 'casa-horizonte',
-    name: 'Casa Horizonte',
-    serviceId: 'supervision-obra',
-    location: 'Valle de Bravo',
-    year: '2025',
+    slug: "casa-horizonte",
+    name: "Casa Horizonte",
+    serviceId: "supervision-obra",
+    location: "Valle de Bravo",
+    year: "2025",
     cover: casaMarCover,
-    gallery: [casaMarCover, casaMar01, casaMar02, residenciaEncino01, residenciaEncino02, casaMar01],
-    description: 'La supervisión de una casa en pendiente enfocada en conservar las visuales, la precisión estructural y los acabados naturales.',
-    problem: 'La topografía y los accesos complicaban la secuencia de obra y el suministro de materiales.',
-    solution: 'Coordinamos revisiones por hitos y anticipamos decisiones críticas para mantener calidad y avance continuo.',
+    gallery: [
+      casaMarCover,
+      casaMar01,
+      casaMar02,
+      residenciaEncino01,
+      residenciaEncino02,
+      casaMar01,
+    ],
+    description:
+      "La supervisión de una casa en pendiente enfocada en conservar las visuales, la precisión estructural y los acabados naturales.",
+    problem:
+      "La topografía y los accesos complicaban la secuencia de obra y el suministro de materiales.",
+    solution:
+      "Coordinamos revisiones por hitos y anticipamos decisiones críticas para mantener calidad y avance continuo.",
   },
   {
     id: 16,
-    slug: 'estudio-lienzo',
-    name: 'Estudio Lienzo',
-    serviceId: 'diseno-interiores',
-    location: 'Monterrey',
-    year: '2025',
+    slug: "estudio-lienzo",
+    name: "Estudio Lienzo",
+    serviceId: "diseno-interiores",
+    location: "Monterrey",
+    year: "2025",
     cover: oficinasPrismaCover,
-    gallery: [oficinasPrismaCover, oficinasPrisma01, oficinasPrisma02, casaUmbral01, casaUmbral02, oficinasPrisma02],
-    description: 'Un estudio creativo flexible donde iluminación, almacenamiento y superficies de trabajo forman un sistema continuo.',
-    problem: 'El equipo necesitaba alternar entre trabajo individual, sesiones colectivas y presentación de proyectos.',
-    solution: 'Creamos zonas reconfigurables y mobiliario integrado para adaptar el espacio a distintos ritmos de uso.',
+    gallery: [
+      oficinasPrismaCover,
+      oficinasPrisma01,
+      oficinasPrisma02,
+      casaUmbral01,
+      casaUmbral02,
+      oficinasPrisma02,
+    ],
+    description:
+      "Un estudio creativo flexible donde iluminación, almacenamiento y superficies de trabajo forman un sistema continuo.",
+    problem:
+      "El equipo necesitaba alternar entre trabajo individual, sesiones colectivas y presentación de proyectos.",
+    solution:
+      "Creamos zonas reconfigurables y mobiliario integrado para adaptar el espacio a distintos ritmos de uso.",
   },
   {
     id: 17,
-    slug: 'casa-patio',
-    name: 'Casa Patio',
-    serviceId: 'arquitectura',
-    location: 'Mérida',
-    year: '2025',
+    slug: "casa-patio",
+    name: "Casa Patio",
+    serviceId: "arquitectura",
+    location: "Mérida",
+    year: "2025",
     cover: casaNorteCover,
-    gallery: [casaNorteCover, casaNorte01, casaNorte02, patioLuz01, patioLuz02, casaNorte01],
-    description: 'Una casa tropical organizada en torno a patios sombreados que favorecen ventilación, privacidad y vida exterior.',
-    problem: 'El clima cálido requería disminuir la exposición solar y aprovechar los vientos dominantes durante todo el año.',
-    solution: 'Trabajamos volúmenes angostos, cubiertas profundas y vegetación para producir espacios frescos de manera pasiva.',
+    gallery: [
+      casaNorteCover,
+      casaNorte01,
+      casaNorte02,
+      patioLuz01,
+      patioLuz02,
+      casaNorte01,
+    ],
+    description:
+      "Una casa tropical organizada en torno a patios sombreados que favorecen ventilación, privacidad y vida exterior.",
+    problem:
+      "El clima cálido requería disminuir la exposición solar y aprovechar los vientos dominantes durante todo el año.",
+    solution:
+      "Trabajamos volúmenes angostos, cubiertas profundas y vegetación para producir espacios frescos de manera pasiva.",
   },
   {
     id: 18,
-    slug: 'oficinas-norte',
-    name: 'Oficinas Norte',
-    serviceId: 'proyectos-ejecutivos',
-    location: 'Monterrey',
-    year: '2025',
+    slug: "oficinas-norte",
+    name: "Oficinas Norte",
+    serviceId: "proyectos-ejecutivos",
+    location: "Monterrey",
+    year: "2025",
     cover: oficinasPrismaCover,
-    gallery: [oficinasPrismaCover, oficinasPrisma02, oficinasPrisma01, cocinaLinea02, cocinaLinea01, oficinasPrisma02],
-    description: 'Documentación ejecutiva para oficinas de alta ocupación con una infraestructura flexible y acabados duraderos.',
-    problem: 'Las distintas áreas debían compartir instalaciones y permitir cambios futuros sin detener la operación.',
-    solution: 'Coordinamos módulos, plafones y redes técnicas para facilitar mantenimiento y futuras reconfiguraciones.',
+    gallery: [
+      oficinasPrismaCover,
+      oficinasPrisma02,
+      oficinasPrisma01,
+      cocinaLinea02,
+      cocinaLinea01,
+      oficinasPrisma02,
+    ],
+    description:
+      "Documentación ejecutiva para oficinas de alta ocupación con una infraestructura flexible y acabados duraderos.",
+    problem:
+      "Las distintas áreas debían compartir instalaciones y permitir cambios futuros sin detener la operación.",
+    solution:
+      "Coordinamos módulos, plafones y redes técnicas para facilitar mantenimiento y futuras reconfiguraciones.",
   },
   {
     id: 19,
-    slug: 'departamento-alba',
-    name: 'Departamento Alba',
-    serviceId: 'remodelaciones',
-    location: 'Ciudad de México',
-    year: '2025',
+    slug: "departamento-alba",
+    name: "Departamento Alba",
+    serviceId: "remodelaciones",
+    location: "Ciudad de México",
+    year: "2025",
     cover: casaClaraCover,
-    gallery: [casaClaraCover, casaClara01, casaClara02, cocinaLinea01, casaUmbral01, casaClara02],
-    description: 'Una remodelación luminosa que reorganiza un departamento existente para una forma de vida más abierta y flexible.',
-    problem: 'Los espacios sociales eran reducidos y la cocina permanecía aislada del resto de la vivienda.',
-    solution: 'Integramos las áreas comunes y concentramos servicios para liberar vistas y mejorar las circulaciones.',
+    gallery: [
+      casaClaraCover,
+      casaClara01,
+      casaClara02,
+      cocinaLinea01,
+      casaUmbral01,
+      casaClara02,
+    ],
+    description:
+      "Una remodelación luminosa que reorganiza un departamento existente para una forma de vida más abierta y flexible.",
+    problem:
+      "Los espacios sociales eran reducidos y la cocina permanecía aislada del resto de la vivienda.",
+    solution:
+      "Integramos las áreas comunes y concentramos servicios para liberar vistas y mejorar las circulaciones.",
   },
   {
     id: 20,
-    slug: 'restaurante-brasa',
-    name: 'Restaurante Brasa',
-    serviceId: 'construccion',
-    location: 'Guadalajara',
-    year: '2024',
+    slug: "restaurante-brasa",
+    name: "Restaurante Brasa",
+    serviceId: "construccion",
+    location: "Guadalajara",
+    year: "2024",
     cover: patioLuzCover,
-    gallery: [patioLuzCover, patioLuz01, patioLuz02, oficinasPrisma01, cocinaLinea02, patioLuz02],
-    description: 'La construcción de un restaurante cálido y directo donde cocina, sala y terraza funcionan como una sola experiencia.',
-    problem: 'La obra debía integrar equipos especializados, ventilación y acabados artesanales dentro de un local existente.',
-    solution: 'Coordinamos instalaciones y oficios desde una secuencia precisa que redujo interferencias durante la ejecución.',
+    gallery: [
+      patioLuzCover,
+      patioLuz01,
+      patioLuz02,
+      oficinasPrisma01,
+      cocinaLinea02,
+      patioLuz02,
+    ],
+    description:
+      "La construcción de un restaurante cálido y directo donde cocina, sala y terraza funcionan como una sola experiencia.",
+    problem:
+      "La obra debía integrar equipos especializados, ventilación y acabados artesanales dentro de un local existente.",
+    solution:
+      "Coordinamos instalaciones y oficios desde una secuencia precisa que redujo interferencias durante la ejecución.",
   },
   {
     id: 21,
-    slug: 'residencia-bosque',
-    name: 'Residencia Bosque',
-    serviceId: 'supervision-obra',
-    location: 'Estado de México',
-    year: '2024',
+    slug: "residencia-bosque",
+    name: "Residencia Bosque",
+    serviceId: "supervision-obra",
+    location: "Estado de México",
+    year: "2024",
     cover: residenciaEncinoCover,
-    gallery: [residenciaEncinoCover, residenciaEncino02, residenciaEncino01, pabellonUno01, pabellonUno02, residenciaEncino02],
-    description: 'Supervisión integral de una residencia entre árboles con especial atención a estructura, impermeabilización y carpinterías.',
-    problem: 'La humedad del sitio y la complejidad de los encuentros exigían revisar cada cierre antes de avanzar.',
-    solution: 'Implementamos listas de control, pruebas y reportes visuales para asegurar el desempeño de cada sistema.',
+    gallery: [
+      residenciaEncinoCover,
+      residenciaEncino02,
+      residenciaEncino01,
+      pabellonUno01,
+      pabellonUno02,
+      residenciaEncino02,
+    ],
+    description:
+      "Supervisión integral de una residencia entre árboles con especial atención a estructura, impermeabilización y carpinterías.",
+    problem:
+      "La humedad del sitio y la complejidad de los encuentros exigían revisar cada cierre antes de avanzar.",
+    solution:
+      "Implementamos listas de control, pruebas y reportes visuales para asegurar el desempeño de cada sistema.",
   },
   {
     id: 22,
-    slug: 'casa-arena',
-    name: 'Casa Arena',
-    serviceId: 'arquitectura',
-    location: 'La Paz',
-    year: '2024',
+    slug: "casa-arena",
+    name: "Casa Arena",
+    serviceId: "arquitectura",
+    location: "La Paz",
+    year: "2024",
     cover: casaMarCover,
-    gallery: [casaMarCover, casaMar01, casaMar02, casaNorte01, residenciaEncino02, casaMar02],
-    description: 'Una vivienda costera de geometría sobria que enmarca el horizonte y crea refugios frente al clima del desierto.',
-    problem: 'El proyecto debía responder al viento, la radiación intensa y la limitada disponibilidad de agua.',
-    solution: 'Propusimos patios protegidos, materiales de bajo mantenimiento y estrategias pasivas de sombra y ventilación.',
+    gallery: [
+      casaMarCover,
+      casaMar01,
+      casaMar02,
+      casaNorte01,
+      residenciaEncino02,
+      casaMar02,
+    ],
+    description:
+      "Una vivienda costera de geometría sobria que enmarca el horizonte y crea refugios frente al clima del desierto.",
+    problem:
+      "El proyecto debía responder al viento, la radiación intensa y la limitada disponibilidad de agua.",
+    solution:
+      "Propusimos patios protegidos, materiales de bajo mantenimiento y estrategias pasivas de sombra y ventilación.",
   },
   {
     id: 23,
-    slug: 'galeria-central',
-    name: 'Galería Central',
-    serviceId: 'diseno-interiores',
-    location: 'Ciudad de México',
-    year: '2024',
+    slug: "galeria-central",
+    name: "Galería Central",
+    serviceId: "diseno-interiores",
+    location: "Ciudad de México",
+    year: "2024",
     cover: cocinaLineaCover,
-    gallery: [cocinaLineaCover, cocinaLinea01, cocinaLinea02, oficinasPrisma01, casaClara02, cocinaLinea01],
-    description: 'Un interior neutro y adaptable diseñado para que cada exposición transforme por completo la percepción del lugar.',
-    problem: 'La galería necesitaba soportar montajes variables, controlar la luz y mantener instalaciones fuera de la vista.',
-    solution: 'Diseñamos superficies continuas, iluminación regulable y puntos técnicos capaces de recibir múltiples configuraciones.',
+    gallery: [
+      cocinaLineaCover,
+      cocinaLinea01,
+      cocinaLinea02,
+      oficinasPrisma01,
+      casaClara02,
+      cocinaLinea01,
+    ],
+    description:
+      "Un interior neutro y adaptable diseñado para que cada exposición transforme por completo la percepción del lugar.",
+    problem:
+      "La galería necesitaba soportar montajes variables, controlar la luz y mantener instalaciones fuera de la vista.",
+    solution:
+      "Diseñamos superficies continuas, iluminación regulable y puntos técnicos capaces de recibir múltiples configuraciones.",
   },
   {
     id: 24,
-    slug: 'taller-sur',
-    name: 'Taller Sur',
-    serviceId: 'proyectos-ejecutivos',
-    location: 'Oaxaca',
-    year: '2024',
+    slug: "taller-sur",
+    name: "Taller Sur",
+    serviceId: "proyectos-ejecutivos",
+    location: "Oaxaca",
+    year: "2024",
     cover: pabellonUnoCover,
-    gallery: [pabellonUnoCover, pabellonUno01, pabellonUno02, oficinasPrisma01, oficinasPrisma02, pabellonUno01],
-    description: 'Un proyecto ejecutivo para producción artesanal que integra áreas de trabajo, almacenamiento y exhibición.',
-    problem: 'Los procesos requerían recorridos eficientes, ventilación natural y detalles resistentes al uso intensivo.',
-    solution: 'Documentamos flujos, instalaciones y encuentros constructivos para ejecutar el espacio con claridad y economía.',
+    gallery: [
+      pabellonUnoCover,
+      pabellonUno01,
+      pabellonUno02,
+      oficinasPrisma01,
+      oficinasPrisma02,
+      pabellonUno01,
+    ],
+    description:
+      "Un proyecto ejecutivo para producción artesanal que integra áreas de trabajo, almacenamiento y exhibición.",
+    problem:
+      "Los procesos requerían recorridos eficientes, ventilación natural y detalles resistentes al uso intensivo.",
+    solution:
+      "Documentamos flujos, instalaciones y encuentros constructivos para ejecutar el espacio con claridad y economía.",
   },
   {
     id: 25,
-    slug: 'casa-loma',
-    name: 'Casa Loma',
-    serviceId: 'remodelaciones',
-    location: 'Cuernavaca',
-    year: '2023',
+    slug: "casa-loma",
+    name: "Casa Loma",
+    serviceId: "remodelaciones",
+    location: "Cuernavaca",
+    year: "2023",
     cover: patioLuzCover,
-    gallery: [patioLuzCover, casaClara01, patioLuz02, casaClara02, patioLuz01, casaClaraCover],
-    description: 'Una intervención puntual que recupera la relación entre una casa de los años ochenta y su jardín.',
-    problem: 'Ampliaciones sucesivas habían bloqueado la luz y creado desniveles difíciles de recorrer.',
-    solution: 'Retiramos agregados, ordenamos niveles y abrimos la zona social hacia una terraza continua.',
+    gallery: [
+      patioLuzCover,
+      casaClara01,
+      patioLuz02,
+      casaClara02,
+      patioLuz01,
+      casaClaraCover,
+    ],
+    description:
+      "Una intervención puntual que recupera la relación entre una casa de los años ochenta y su jardín.",
+    problem:
+      "Ampliaciones sucesivas habían bloqueado la luz y creado desniveles difíciles de recorrer.",
+    solution:
+      "Retiramos agregados, ordenamos niveles y abrimos la zona social hacia una terraza continua.",
   },
   {
     id: 26,
-    slug: 'hotel-umbral',
-    name: 'Hotel Umbral',
-    serviceId: 'construccion',
-    location: 'San Miguel de Allende',
-    year: '2023',
+    slug: "hotel-umbral",
+    name: "Hotel Umbral",
+    serviceId: "construccion",
+    location: "San Miguel de Allende",
+    year: "2023",
     cover: casaUmbralCover,
-    gallery: [casaUmbralCover, casaUmbral01, casaUmbral02, patioLuz01, cocinaLinea02, casaUmbral02],
-    description: 'La ejecución de un hotel de escala íntima donde cada habitación conserva identidad dentro de un lenguaje común.',
-    problem: 'La obra combinaba una estructura existente con nuevas instalaciones y acabados elaborados por proveedores distintos.',
-    solution: 'Coordinamos muestras, secuencias y entregas por habitación para mantener consistencia en todo el conjunto.',
+    gallery: [
+      casaUmbralCover,
+      casaUmbral01,
+      casaUmbral02,
+      patioLuz01,
+      cocinaLinea02,
+      casaUmbral02,
+    ],
+    description:
+      "La ejecución de un hotel de escala íntima donde cada habitación conserva identidad dentro de un lenguaje común.",
+    problem:
+      "La obra combinaba una estructura existente con nuevas instalaciones y acabados elaborados por proveedores distintos.",
+    solution:
+      "Coordinamos muestras, secuencias y entregas por habitación para mantener consistencia en todo el conjunto.",
   },
   {
     id: 27,
-    slug: 'pabellon-jardin',
-    name: 'Pabellón Jardín',
-    serviceId: 'supervision-obra',
-    location: 'Querétaro',
-    year: '2023',
+    slug: "pabellon-jardin",
+    name: "Pabellón Jardín",
+    serviceId: "supervision-obra",
+    location: "Querétaro",
+    year: "2023",
     cover: pabellonUnoCover,
-    gallery: [pabellonUnoCover, pabellonUno01, pabellonUno02, residenciaEncino01, patioLuz02, pabellonUno02],
-    description: 'Supervisión de un pabellón ligero concebido para reuniones y actividades abiertas dentro de un jardín consolidado.',
-    problem: 'La estructura debía ejecutarse con tolerancias precisas sin afectar la vegetación ni las circulaciones existentes.',
-    solution: 'Planificamos accesos, revisamos prefabricados y verificamos cada montaje antes de liberar los acabados finales.',
+    gallery: [
+      pabellonUnoCover,
+      pabellonUno01,
+      pabellonUno02,
+      residenciaEncino01,
+      patioLuz02,
+      pabellonUno02,
+    ],
+    description:
+      "Supervisión de un pabellón ligero concebido para reuniones y actividades abiertas dentro de un jardín consolidado.",
+    problem:
+      "La estructura debía ejecutarse con tolerancias precisas sin afectar la vegetación ni las circulaciones existentes.",
+    solution:
+      "Planificamos accesos, revisamos prefabricados y verificamos cada montaje antes de liberar los acabados finales.",
   },
-]
+];
 
+/** Contenido de la página “Nosotros”, agrupado por sus secciones visuales. */
 export const company = {
   heroImage: aboutHero,
   studioImage: aboutStudio,
   history: [
-    'ÁREA nace en el año 2013, con la convicción de que la arquitectura tiene el poder de transformar la vida de las personas, a través del espacio que ocupan o habitan.',
-    'A lo largo de nuestra evolución comprendimos que nuestro mayor valor no está únicamente en construir, sino en entender cómo viven, trabajan y conviven las personas, para diseñar espacios que respondan a esas necesidades.',
-    'Por ello, evolucionamos hacia un despacho especializado en arquitectura, diseño y remodelación, donde cada proyecto parte de una idea clara: Crear espacios funcionales, estéticos y duraderos.',
+    "ÁREA nace en el año 2013, con la convicción de que la arquitectura tiene el poder de transformar la vida de las personas, a través del espacio que ocupan o habitan.",
+    "A lo largo de nuestra evolución comprendimos que nuestro mayor valor no está únicamente en construir, sino en entender cómo viven, trabajan y conviven las personas, para diseñar espacios que respondan a esas necesidades.",
+    "Por ello, evolucionamos hacia un despacho especializado en arquitectura, diseño y remodelación, donde cada proyecto parte de una idea clara: Crear espacios funcionales, estéticos y duraderos.",
   ],
   philosophy: [
-    'Creemos que un buen proyecto no debe impresionar únicamente el día de su entrega, debe seguir funcionando diez o veinte años después.',
-    'Cada decisión de diseño debe tener un propósito.',
-    'Cada material debe responder a una necesidad.',
-    'Cada espacio debe mejorar la experiencia de quien lo utiliza.',
-    'No diseñamos para seguir tendencias, diseñamos para resolver problemas y espacios.',
+    "Creemos que un buen proyecto no debe impresionar únicamente el día de su entrega,     debe mantener su funcionalidad y propósito con el paso del tiempo.",
+    "Cada decisión de diseño debe tener un propósito.",
+    "Cada material debe responder a una necesidad.",
+    "Cada espacio debe mejorar la experiencia de quien lo utiliza.",
+    "No diseñamos para seguir tendencias, diseñamos para resolver problemas y espacios.",
   ],
-  mission: 'Diseñar y desarrollar espacios que mejoren la calidad de vida de las personas mediante soluciones arquitectónicas funcionales, estéticas y técnicamente bien ejecutadas.',
-  vision: 'Consolidarnos como uno de los despachos de arquitectura y diseño más reconocidos a nivel global, por la calidad de sus proyectos, la confianza que genera en sus clientes y la capacidad de transformar espacios con un enfoque humano, funcional y contemporáneo.',
+  mission:
+    "Diseñar y desarrollar espacios que mejoren la calidad de vida de las personas mediante soluciones arquitectónicas funcionales, estéticas y técnicamente bien ejecutadas.",
+  vision:
+    "Consolidarnos como uno de los despachos de arquitectura y diseño más reconocidos a nivel global, por la calidad de sus proyectos, la confianza que genera en sus clientes y la capacidad de transformar espacios con un enfoque humano, funcional y contemporáneo.",
   values: [
-    { title: 'Honestidad', text: 'Decimos la verdad, incluso cuando no es la respuesta que el cliente espera escuchar.' },
-    { title: 'Responsabilidad', text: 'Cumplimos nuestros compromisos y asumimos las consecuencias de nuestras decisiones.' },
-    { title: 'Calidad', text: 'Preferimos hacer menos proyectos, pero hacerlos extraordinariamente bien.' },
-    { title: 'Innovación', text: 'Buscamos constantemente nuevas formas de diseñar, construir y comunicar nuestros proyectos.' },
-    { title: 'Cercanía', text: 'Escuchamos antes de proponer. Comprendemos antes de diseñar.' },
+    {
+      title: "Honestidad",
+      text: "Decimos la verdad, incluso cuando no es la respuesta que el cliente espera escuchar.",
+    },
+    {
+      title: "Responsabilidad",
+      text: "Cumplimos nuestros compromisos y asumimos las consecuencias de nuestras decisiones.",
+    },
+    {
+      title: "Calidad",
+      text: "Preferimos hacer menos proyectos, pero hacerlos extraordinariamente bien.",
+    },
+    {
+      title: "Innovación",
+      text: "Buscamos constantemente nuevas formas de diseñar, construir y comunicar nuestros proyectos.",
+    },
+    {
+      title: "Cercanía",
+      text: "Escuchamos antes de proponer. Comprendemos antes de diseñar.",
+    },
   ],
   promise: [
-    'No vendemos metros cuadrados.',
-    'No vendemos planos.',
-    'No vendemos remodelaciones.',
-    'Creamos espacios que funcionan mejor para las personas que los habitan.',
+    "No vendemos metros cuadrados.",
+    "No vendemos planos.",
+    "No vendemos remodelaciones.",
+    "Creamos espacios que funcionan mejor para las personas que los habitan.",
   ],
   whatWeDo: {
-    introduction: 'En ÁREA desarrollamos proyectos integrales de arquitectura y diseño, especializados en clientes residenciales y comerciales.',
-    services: ['Arquitectura.', 'Proyectos ejecutivos.', 'Diseño de interiores.', 'Remodelaciones.', 'Construcción', 'Supervisión de obra.'],
+    introduction:
+      "En ÁREA desarrollamos proyectos integrales de arquitectura y diseño, especializados en clientes residenciales y comerciales.",
+    services: [
+      "Arquitectura.",
+      "Proyectos ejecutivos.",
+      "Diseño de interiores.",
+      "Remodelaciones.",
+      "Construcción",
+      "Supervisión de obra.",
+    ],
   },
-  manifesto: 'En ÁREA creemos que la arquitectura comienza mucho antes de colocar el primer ladrillo. Comienza al escuchar, observar y comprender la vida de quienes habitarán un espacio. Cada proyecto representa una oportunidad para mejorar la manera en que las personas viven, trabajan y conviven. Diseñamos con intención, ejecutamos con responsabilidad y cuidamos cada detalle porque entendemos que un buen espacio no solo se ve bien: se vive bien.',
-}
+  manifesto:
+    "En ÁREA creemos que la arquitectura comienza mucho antes de colocar el primer ladrillo. Comienza al escuchar, observar y comprender la vida de quienes habitarán un espacio. Cada proyecto representa una oportunidad para mejorar la manera en que las personas viven, trabajan y conviven. Diseñamos con intención, ejecutamos con responsabilidad y cuidamos cada detalle porque entendemos que un buen espacio no solo se ve bien: se vive bien.",
+};
 
+/** Beneficios: `icon` es una clave del diccionario de `utils/icons.js`. */
 export const benefits = [
-  { icon: 'palette', label: 'Diseño funcional' },
-  { icon: 'people', label: 'Acompañamiento continuo' },
-  { icon: 'tools', label: 'Soluciones personalizadas' },
-  { icon: 'medal', label: 'Calidad en ejecución' },
-]
+  { icon: "palette", label: "Diseño funcional" },
+  { icon: "people", label: "Acompañamiento continuo" },
+  { icon: "tools", label: "Soluciones personalizadas" },
+  { icon: "medal", label: "Calidad en ejecución" },
+];
 
+/** Testimonios: `projectSlug` crea el enlace hacia un proyecto existente. */
 export const testimonials = [
-  { name: 'Mariana Salas', company: 'Casa Umbral', quote: 'El equipo entendió cómo queríamos vivir el espacio y lo convirtió en una propuesta clara, cálida y funcional.', projectSlug: 'casa-umbral' },
-  { name: 'Carlos Ibarra', company: 'Patio Luz', quote: 'Nos acompañaron en cada decisión. El proceso fue transparente y el resultado superó lo que habíamos imaginado.', projectSlug: 'patio-luz' },
-  { name: 'Fernanda Ruiz', company: 'Residencia Encino', quote: 'Lograron una casa serena y práctica sin perder personalidad. Cada material tiene una razón de estar ahí.', projectSlug: 'residencia-encino' },
-  { name: 'Andrés Lozano', company: 'Casa Norte', quote: 'La coordinación de obra fue impecable. Siempre tuvimos claridad sobre avances, costos y las decisiones pendientes.', projectSlug: 'casa-norte' },
-  { name: 'Lucía Ortega', company: 'Cocina Línea', quote: 'Una intervención precisa que cambió por completo nuestra rutina. Ahora el espacio funciona tan bien como se ve.', projectSlug: 'cocina-linea' },
-  { name: 'Roberto Mena', company: 'Casa Clara', quote: 'Encontramos un estudio atento, ordenado y creativo. El proyecto conservó nuestra esencia y mejoró cada ambiente.', projectSlug: 'casa-clara' },
-]
+  {
+    name: "Mariana Salas",
+    company: "Casa Umbral",
+    quote:
+      "El equipo entendió cómo queríamos vivir el espacio y lo convirtió en una propuesta clara, cálida y funcional.",
+    projectSlug: "casa-umbral",
+  },
+  {
+    name: "Carlos Ibarra",
+    company: "Patio Luz",
+    quote:
+      "Nos acompañaron en cada decisión. El proceso fue transparente y el resultado superó lo que habíamos imaginado.",
+    projectSlug: "patio-luz",
+  },
+  {
+    name: "Fernanda Ruiz",
+    company: "Residencia Encino",
+    quote:
+      "Lograron una casa serena y práctica sin perder personalidad. Cada material tiene una razón de estar ahí.",
+    projectSlug: "residencia-encino",
+  },
+  {
+    name: "Andrés Lozano",
+    company: "Casa Norte",
+    quote:
+      "La coordinación de obra fue impecable. Siempre tuvimos claridad sobre avances, costos y las decisiones pendientes.",
+    projectSlug: "casa-norte",
+  },
+  {
+    name: "Lucía Ortega",
+    company: "Cocina Línea",
+    quote:
+      "Una intervención precisa que cambió por completo nuestra rutina. Ahora el espacio funciona tan bien como se ve.",
+    projectSlug: "cocina-linea",
+  },
+  {
+    name: "Roberto Mena",
+    company: "Casa Clara",
+    quote:
+      "Encontramos un estudio atento, ordenado y creativo. El proyecto conservó nuestra esencia y mejoró cada ambiente.",
+    projectSlug: "casa-clara",
+  },
+];
 
+/**
+ * Fachada pública del módulo: agrupa las colecciones para consumidores que
+ * prefieren una sola importación (`app.js`, `InternalPages.js`, `Hero.js`).
+ * También se conservan exports individuales para módulos que sólo necesitan una
+ * colección, como `Header.js`, evitando acoplarlos al objeto completo.
+ */
 export const siteData = {
   heroImage: homeHero,
   services,
@@ -507,4 +936,4 @@ export const siteData = {
   benefits,
   testimonials,
   company,
-}
+};

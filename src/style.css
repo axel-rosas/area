@@ -1,11 +1,32 @@
+/*
+ * ESTILOS GLOBALES Y DE LA PÁGINA DE INICIO
+ * =========================================
+ *
+ * Este archivo se importa primero desde `src/main.js`. Contiene fundamentos,
+ * componentes compartidos y secciones del home. `pages.css` se separó porque
+ * las páginas internas tienen muchas reglas propias; mantenerlas aquí haría más
+ * difícil localizar qué estilo corresponde al home y cuáles son reutilizables.
+ *
+ * Cómo leer una regla CSS:
+ *   .selector {        -> elige elementos del HTML.
+ *     propiedad: valor; -> modifica una característica de esos elementos.
+ *   }
+ * Varias propiedades juntas expresan una intención (layout, tamaño, color o
+ * animación), por eso se documentan por regla/bloque y no como líneas aisladas.
+ */
+
+/* TOKENS: variables reutilizables para conservar colores y tipografía coherentes. */
 :root {
+  /* Paleta principal; `--nombre` declara una custom property. */
   --navy: #121920;
   --navy-deep: #0b1016;
   --orange: #ff5400;
   --white: #f7f7f5;
   --muted: #c9cdd3;
   --border: rgba(255, 255, 255, 0.9);
+  /* Fallbacks: si Poppins no carga, prueba Helvetica Neue, Arial y sans-serif. */
   --font: 'Poppins', 'Helvetica Neue', Arial, sans-serif;
+  /* Valores base heredados por todo el documento. */
   color: var(--white);
   background: var(--navy);
   font-family: var(--font);
@@ -14,7 +35,9 @@
   -webkit-font-smoothing: antialiased;
 }
 
+/* RESET MÍNIMO: elimina diferencias molestas entre estilos nativos de navegadores. */
 * {
+  /* Incluye padding y border dentro del ancho/alto declarado. */
   box-sizing: border-box;
 }
 
@@ -78,6 +101,7 @@ blockquote {
   margin: 0;
 }
 
+/* INTRO DEL HOME: overlay fijo animado; `app.js` lo elimina al terminar. */
 .home-intro {
   position: fixed;
   z-index: 1000;
@@ -90,6 +114,7 @@ blockquote {
   animation: home-intro-exit 700ms 2300ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
+/* Pseudoelemento decorativo que dibuja una retícula detrás de la marca. */
 .home-intro::before {
   content: '';
   position: absolute;
@@ -189,6 +214,7 @@ blockquote {
   }
 }
 
+/* UTILIDADES COMPARTIDAS: accesibilidad, iconos y botón de contorno. */
 .sr-only {
   position: absolute;
   width: 1px;
@@ -232,6 +258,7 @@ blockquote {
   background: var(--white);
 }
 
+/* HEADER Y NAVEGACIÓN: fijo, transparente arriba y sólido al hacer scroll. */
 .site-header {
   position: fixed;
   z-index: 20;
@@ -409,6 +436,7 @@ blockquote {
   display: none;
 }
 
+/* HERO DEL HOME: la imagen llega desde Hero.js mediante `--hero-image`. */
 .hero-section {
   position: relative;
   width: 100%;
@@ -437,6 +465,17 @@ blockquote {
 
 .hero-brand-view {
   text-align: center;
+}
+
+.hero-brand-symbol {
+  display: flex;
+  justify-content: center;
+  margin-bottom: clamp(24px, 3vw, 42px);
+}
+
+.hero-brand-symbol .brand-symbol {
+  width: clamp(88px, 9.5vw, 136px);
+  height: clamp(88px, 9.5vw, 136px);
 }
 
 .brand-mark {
@@ -487,6 +526,7 @@ blockquote {
   filter: brightness(0) saturate(100%) invert(42%) sepia(96%) saturate(3527%) hue-rotate(2deg) brightness(103%) contrast(105%);
 }
 
+/* SERVICIOS DEL HOME: tarjetas expansibles controladas por `.is-open`. */
 .services-showcase-section {
   padding-block: 120px;
 }
@@ -609,6 +649,7 @@ blockquote {
 }
 
 @media (hover: hover) and (pointer: fine) {
+  /* Sólo equipos con ratón obtienen estos estados hover; táctil usa clicks de JS. */
   .service-card:hover > img,
   .service-card:focus-within > img {
     filter: brightness(0.44) saturate(0.82);
@@ -631,6 +672,7 @@ blockquote {
   }
 }
 
+/* PORTAFOLIO DESTACADO DEL HOME. Las tarjetas base se definen en pages.css. */
 .portfolio-section {
   background: var(--navy);
 }
@@ -651,6 +693,7 @@ blockquote {
   justify-content: center;
 }
 
+/* CONTENEDORES Y ENCABEZADOS compartidos por las secciones de contenido. */
 .content-section {
   width: min(1130px, calc(100% - 80px));
   margin: 0 auto;
@@ -685,6 +728,7 @@ blockquote {
   text-transform: uppercase;
 }
 
+/* BENEFICIOS: cuadrícula de razones para elegir al estudio. */
 .benefits-section {
   padding-top: 80px;
 }
@@ -721,6 +765,7 @@ blockquote {
   line-height: 1.45;
 }
 
+/* TESTIMONIOS: tarjetas con cliente, cita y enlace al proyecto relacionado. */
 .testimonials-section {
   padding-top: 145px;
 }
@@ -763,6 +808,7 @@ blockquote {
   text-transform: uppercase;
 }
 
+/* CONTACTO: grid de introducción, formulario y cobertura de servicio. */
 .contact-section {
   padding-top: 160px;
   padding-bottom: 145px;
@@ -858,10 +904,21 @@ blockquote {
   grid-area: location;
 }
 
-.contact-location > iframe {
-  display: block;
-  width: 100%;
-  height: 320px;
+.contact-coverage {
+  display: flex;
+  gap: 20px;
+  padding: 26px;
+  border: 1px solid var(--border);
+  font-size: 17px;
+  line-height: 1.55;
+}
+
+.contact-coverage-label {
+  margin-bottom: 7px;
+  color: var(--orange);
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
 }
 
 .contact-detail {
@@ -872,6 +929,7 @@ blockquote {
   line-height: 1.55;
 }
 
+.contact-coverage .icon,
 .contact-detail .icon {
   flex: 0 0 auto;
   width: 18px;
@@ -881,6 +939,7 @@ blockquote {
   fill: var(--orange);
 }
 
+.contact-coverage .icon--asset,
 .contact-detail .icon--asset {
   filter: brightness(0) saturate(100%) invert(42%) sepia(96%) saturate(3527%) hue-rotate(2deg) brightness(103%) contrast(105%);
 }
@@ -891,6 +950,7 @@ blockquote {
   margin-top: 29px;
 }
 
+/* FOOTER: navegación secundaria y cierre legal del documento. */
 .site-footer {
   background: var(--navy-deep);
 }
@@ -949,6 +1009,7 @@ blockquote {
   text-align: center;
 }
 
+/* TABLET: reorganiza navegación y grids cuando el viewport mide hasta 1023 px. */
 @media (max-width: 1023px) {
   .main-nav {
     gap: 27px;
@@ -1007,10 +1068,6 @@ blockquote {
     gap: 38px;
   }
 
-  .contact-location > iframe {
-    height: 350px;
-  }
-
   .footer-inner {
     grid-template-columns: repeat(3, 1fr);
     min-height: 450px;
@@ -1023,6 +1080,7 @@ blockquote {
   }
 }
 
+/* MÓVIL: convierte layouts multicolumna en flujos verticales hasta 767 px. */
 @media (max-width: 767px) {
   .home-intro-row {
     --intro-symbol-size: 36px;
@@ -1122,6 +1180,15 @@ blockquote {
 
   .brand-mark--hero {
     width: min(300px, 78vw);
+  }
+
+  .hero-brand-symbol {
+    margin-bottom: 22px;
+  }
+
+  .hero-brand-symbol .brand-symbol {
+    width: 76px;
+    height: 76px;
   }
 
   .hero-brand-view p {
@@ -1265,10 +1332,6 @@ blockquote {
     flex-direction: column;
   }
 
-  .contact-location > iframe {
-    height: 270px;
-  }
-
   .contact-social {
     justify-content: center;
   }
@@ -1291,6 +1354,7 @@ blockquote {
   }
 }
 
+/* TELÉFONOS MUY ESTRECHOS: pequeños ajustes para no comprimir el contenido. */
 @media (max-width: 360px) {
   .home-intro-row {
     --intro-gap: 14px;
@@ -1300,6 +1364,7 @@ blockquote {
   }
 }
 
+/* ACCESIBILIDAD: reduce o elimina movimiento si el sistema del usuario lo pide. */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
